@@ -1,0 +1,106 @@
+#!/bin/bash
+# Copyright (c) 2021, Joaquin G. Duo
+# Code Licensed under LGPL License. See LICENSE file.
+
+if [[ $@ == *--help* ]] ; then
+  echo "
+Forward for Zyxel Router
+
+  Print NAT table
+  $(basename $0)
+
+  Forward specific port
+  $(basename $0) <inet port> <internal ip> <interal port> [rulename] [ALL|TCP|UDP] [(active)yes|no] [rulenumber]
+
+  "
+  exit 0
+fi
+
+
+INET_PORT=$1
+SERVER_IP=$2
+SERVER_PORT=$3
+RULENAME=${4:-zyxel_port_foward}
+PROTOCOL=${5:-ALL}
+RULE_NUMBER=${6:-2}
+ACTIVE=${7:-yes}
+
+OUT=/tmp/expect.stdout.tmp
+ERR=/tmp/expect.stderr.tmp
+
+if [[ $ZYXEL_ROUTER_PASSWD == "" ]] ; then
+  echo "ERROR: no ZYXEL_ROUTER_PASSWD env var defined"
+  exit 1
+fi
+
+if [[ ! $SERVER_PORT ]] ; then
+  CMDS=''
+else
+  CMDS='
+    send -- "ip nat server load 1\r"
+    expect "Speedy>"
+    send -- "ip nat server edit '$RULE_NUMBER' active '$ACTIVE'\r"
+    expect "Speedy>"
+    send -- "ip nat server edit '$RULE_NUMBER' svrport '$SERVER_PORT' '$SERVER_PORT'\r"
+    expect "Speedy>"
+    send -- "ip nat server edit '$RULE_NUMBER' intport '$INET_PORT' '$INET_PORT'\r"
+    expect "Speedy>"
+    send -- "ip nat server edit '$RULE_NUMBER' rulename '$RULENAME'\r"
+    expect "Speedy>"
+    send -- "ip nat server edit '$RULE_NUMBER' forwardip '$SERVER_IP'\r"
+    expect "Speedy>"
+    send -- "ip nat server edit '$RULE_NUMBER' protocol '$PROTOCOL'\r"
+    expect "Speedy>"
+    send -- "ip nat server save\r"
+    expect "Speedy>"
+  '
+fi
+
+SCRIPT='
+set timeout 5
+
+spawn telnet 192.168.2.1
+
+expect "Password:"
+send -- "'"$ZYXEL_ROUTER_PASSWD"'"
+
+expect "Menu\[21;38HSelection\[21;48HNumber:"
+send -- "24\r"
+
+expect "8.\[12;30HCommand\[12;38HInterpreter\[12;50HMode"
+expect "Menu\[21;38HSelection\[21;48HNumber:"
+send -- "8\r"
+
+expect "Speedy>"
+
+'"$CMDS"'
+
+send -- "ip nat server disp\r"
+expect "   7"
+send -- "\r"
+
+send -- "exit\r"
+
+expect "Menu\[21;38HSelection\[21;48HNumber:"
+send -- "99\r"
+'
+
+
+run_expect(){
+    expect <(echo "$SCRIPT") > $OUT 2> $ERR
+}
+
+run_expect
+# Repeat if failed
+if grep "spawn id exp4 not open" $ERR > /dev/null ; then
+  run_expect
+fi
+
+cat $OUT | tr -d '\000-\010\013\014\016-\037' |  grep 'Svr P Range' -A 51 -m 1
+
+rm $OUT $ERR
+
+if [[ $SERVER_PORT ]]; then
+    echo "REMEMBER: set the Zyxel Firewall for ports $INET_PORT and $SERVER_PORT"
+fi
+

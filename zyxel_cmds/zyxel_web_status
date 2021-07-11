@@ -1,0 +1,5 @@
+#!/bin/bash
+# Copyright (c) 2021, Joaquin G. Duo
+# Code Licensed under LGPL License. See LICENSE file.
+
+ZYXEL_WEBSERVER_FLAG=status zyxel_web_enable $@

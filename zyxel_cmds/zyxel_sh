@@ -1,0 +1,47 @@
+#!/bin/bash
+# Copyright (c) 2021, Joaquin G. Duo
+# Code Licensed under LGPL License. See LICENSE file.
+
+if [[ $@ == *--help* ]] ; then
+  echo "
+Open a Zyxel Router Telnet Shell
+
+  Examples 
+    $(basename $0)                     # opens a shell and lets the user interact
+    $(basename $0) ip nat server disp  # runs the command 'ip...' command in Zyxel and later interact
+  
+  --help  print this help
+  "
+  exit 0
+fi
+
+if [[ $ZYXEL_ROUTER_PASSWD == "" ]] ; then
+  echo "ERROR: no ZYXEL_ROUTER_PASSWD env var defined"
+  exit 1
+fi
+
+SCRIPT='
+set timeout 5
+
+spawn telnet 192.168.2.1
+
+expect "Password:"
+send -- "'"$ZYXEL_ROUTER_PASSWD"'"
+
+expect "Menu\[21;38HSelection\[21;48HNumber:"
+send -- "24\r"
+
+expect "8.\[12;30HCommand\[12;38HInterpreter\[12;50HMode"
+expect "Menu\[21;38HSelection\[21;48HNumber:"
+send -- "8\r"
+
+expect "Speedy>"
+
+send -- "'"$*"'\r"
+
+interact
+
+'
+
+
+expect <(echo "$SCRIPT") 

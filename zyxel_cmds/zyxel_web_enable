@@ -1,0 +1,94 @@
+#!/bin/bash
+# Copyright (c) 2021, Joaquin G. Duo
+# Code Licensed under LGPL License. See LICENSE file.
+
+if [[ $@ == *--help* ]] ; then
+  echo "
+Enable/Disable a Zyxel Router web interface (some of them have vulnerabilities)
+
+  Examples 
+    $(basename $0)                              #open the web server for LAN only
+    ZYXEL_WEBSERVER_FLAG=1 $(basename $0)       #close the web server
+    ZYXEL_WEBSERVER_FLAG=status $(basename $0)  #print the status
+  
+  --help  print this help
+  "
+  exit 0
+fi
+
+if [[ $ZYXEL_ROUTER_PASSWD == "" ]] ; then
+  echo "ERROR: no ZYXEL_ROUTER_PASSWD env var defined"
+  exit 1
+fi
+
+#0: ALL, 1: None, 2:LAN only, 3:WAN only
+ZYXEL_WEBSERVER_FLAG=${ZYXEL_WEBSERVER_FLAG:-2}
+
+if [[ $ZYXEL_WEBSERVER_FLAG == "status" ]] ; then
+  CMDS=''
+else
+  CMDS='send -- "sys server load\r"
+  expect "Speedy>"
+  send -- "sys server access web '"$ZYXEL_WEBSERVER_FLAG"'\r"
+  expect "Speedy>"
+  send -- "sys server save\r"
+  expect "Speedy>"'
+fi
+
+SCRIPT='
+set timeout 5
+
+spawn telnet 192.168.2.1
+
+expect "Password:"
+send -- "'"$ZYXEL_ROUTER_PASSWD"'"
+
+expect "Menu\[21;38HSelection\[21;48HNumber:"
+send -- "24\r"
+
+expect "8.\[12;30HCommand\[12;38HInterpreter\[12;50HMode"
+expect "Menu\[21;38HSelection\[21;48HNumber:"
+send -- "8\r"
+
+expect "Speedy>"
+'"$CMDS"'
+
+send -- "sys server disp\r"
+
+expect "Speedy>"
+
+send -- "exit\r"
+
+expect "Menu\[21;38HSelection\[21;48HNumber:"
+send -- "99\r"
+'
+
+OUT=/tmp/expect.stdout.tmp
+ERR=/tmp/expect.stderr.tmp
+
+run_expect(){
+    expect <(echo "$SCRIPT") > $OUT 2> $ERR
+}
+
+run_expect
+
+if grep "spawn id exp4 not open" $ERR > /dev/null ; then
+  run_expect
+fi
+
+GREPPED_OUT=$(cat $OUT | tr -d '\000-\010\013\014\016-\037' | grep "sys server disp" -A 1000 | grep "ICMP ping" -B 1000 -A 1|\
+sed -r  's/^7+//' | sed 's/Speedy> 7/Speedy> /' | grep "Speedy>" -A 1000)
+
+echo "$GREPPED_OUT"
+echo
+echo "=============================================="
+echo
+echo "$GREPPED_OUT" | grep "Web server" -A 1 | egrep --color '(Web server)|(Access\s=\s+[1-3])|$'
+
+echo
+echo "                                        0:All, 1:None, 2:LAN only, 3:WAN only
+"
+
+rm $OUT $ERR
+
+

@@ -1,0 +1,2777 @@
+
+<!-- saved from url=(0014)about:internet -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+  
+  <meta name="Generator" content="Hand Written HTML - Written by Ian">
+  <meta name="Keywords" content="Netgear, ZyXEL, ZyNOS, CI, Command, Subcommand, Syntax, AUTOEXEC.NET, BootBase">
+  <meta name="Description" content="Netgear / ZyXEL ZyNOS CI and BootBase Commands">
+  <title>ZyNOS CI and BootBase Commands</title>
+  <style type="TEXT/CSS">
+<!--
+HTML, BODY, P, BLOCKQUOTE, TH, TD, LI
+	{ Font-Size: 12px;
+	Font-Family: Arial, Helvetica, Sans-Serif }
+
+TD
+	{ Background-Color: #DDDDDD }
+
+.BGWhite
+	{ Background-Color: #FFFFFF }
+
+A:Link, A:Visited, A:Active
+	{ text-decoration: none }
+
+A:Hover
+	{ text-decoration: underline }
+-->
+  </style>
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<hr>
+
+<a name="Top"></a><h1>ZyNOS CI and BootBase Commands</h1>
+
+<hr>
+
+<p>ZyNOS and all information relating to ZyNOS © 1999 
+ZyXEL Communications Corporation<br>
+<a href="http://www.zyxel.com/">ZyXEL Website</a></p>
+
+<p>This document has been assembled as a service to users of 
+ZyNOS and other interested parties.  No responsibility is 
+assumed for users who use this information to corrupt or 
+damage their equipment.  <b>If you are not sure what you 
+are doing then DON'T do it!</b>  You have been warned.</p>
+
+<p><b>Reader Note:</b> It appears that most commands and subcommands can be abbreviated 
+  to a minimal unique level. If anyone has the full name of commands and the minimum 
+  abbreviation acceptable I would like to feature this information in the command 
+  tables.</p>
+
+<p><b>Reader Note:</b> If anyone finds any errors or omissions in this document 
+  please submit corrections. Also, if you know or can expand on any of the instructions, 
+  commands, definitions, usage or version number when of any commands were added, 
+  removed or changed then please submit them. It is hoped that this document will 
+  grow to become a single point of reference for ZyNOS Command Interface usage.</p>
+
+<p>Please submit error corrections or updates to our <a href="http://www.wxontario.com/cgi-bin/ubbcgi/ultimatebb.cgi?ubb=forum;f=10">ZyNOS 
+  CI and Bootbase Manual Forum</a>.</p>
+
+<hr>
+
+<h2>Contents</h2>
+
+<ul>
+  <li><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#CI">CI (Command Interface) Syntax</a></li>
+  <ul>
+    <li><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#TopLevel">CI (Command Interface) - Top Level Commands</a></li>
+    <li><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#bridge"><i>BRIDGE</i> - Bridge Routing Related Subcommands</a></li>
+    <li><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#device"><i>DEVICE</i> - Device Management Related Subcommands</a></li>
+    <li><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#dialer"><i>DIALER</i> - ISDN Dialer Related Subcommands</a></li>
+    <li><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#ether"><i>ETHER</i> - Ethernet / LAN Debug Subcommands</a></li>
+    <li><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#hdap"><i>HDAP</i> - HDAP Related Subcommands</a></li>
+    <li><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#ip"><i>IP</i> - TCP/IP Protocol Subcommands</a></li>
+    <li><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#ipx"><i>IPX</i> - IPX Related Subcommands</a></li>
+    <li><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#isdn"><i>ISDN</i> - ISDN Related Subcommands</a></li>
+    <li><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#l2tp"><i>L2TP</i> - L2TP Related Subcommands</a></li>
+    <li><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#lan"><i>LAN</i> - LAN Related Subcommands</a></li>
+    <li><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#ppp"><i>PPP</i> - PPP Related Subcommands</a></li>
+    <li><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#radius"><i>RADIUS</i> - Radius Related Subcommands</a></li>
+    <li><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#snmp"><i>SNMP</i> - SNMP Related Subcommands</a></li>
+    <li><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#sys"><i>SYS</i> - System Related Subcommands</a></li>
+    <li><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#wan"><i>WAN</i> - WAN Related Subcommands</a></li>
+  </ul>
+  <li><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#AUTOEXEC.NET">Default AUTOEXEC.NET File Contents</a></li>
+  <li><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#TERMCAP">Default TERMCAP File Contents</a></li>
+  <li><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#BootBase">BootBase Command List</a></li>
+  <li><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#Revision">Revision History</a></li>
+</ul>
+
+<hr>
+
+<p><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr valign="TOP">
+    <td class="BGWhite"><a name="CI"></a><h2>CI (Command Interface) Syntax</h2></td>
+    <td align="RIGHT" class="BGWhite"><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#Top">TOP</a></td>
+  </tr>
+</tbody></table>
+CI has the following command syntax:</p><blockquote>
+<b>command subcommand</b> [<i>&lt;param&gt;</i>]<br>
+<b>command</b> &lt;<i>iface</i> | <i>device</i>&gt; <b>subcommand</b> [&lt;<i>param</i>&gt;]<br>
+<b>command</b> <b>? | help</b><br>
+<b>command</b> <b>subcommand</b> <b>? | help</b></blockquote><p></p>
+
+<p>This document has been colated from a number of sources.  Some 
+sources were for earlier versions of ZyNOS and some predate ZyNOS 
+as it now exists.  Some commands may only be available on specific 
+types of device.  All known commands will be listed here for 
+completeness but may no longer exist on any devices.  Some commands 
+may never have been implemented.</p>
+
+<p>Parameters shown in italics, e.g. <b>&lt;<i>parameter</i>&gt;</b>, 
+should be replaced by the appropriate data.  Paramaters that are 
+shown as a non-italicised list, e.g. <b>&lt;one|two|three&gt;</b>, 
+indicate that one of the values listed should be used.  Parameters 
+shown in square brackets, e.g. <b>[&lt;<i>value</i>&gt;]</b>, are 
+optional and may be ommited.</p>
+
+<p>Some of the more common parameters include:</p><blockquote>
+&lt;<i>chan</i>&gt;: Ethernet channel name, either <b>enet0</b> or <b>enet1</b><br>
+<dd>See "ether config" for the list of available channels<br>
+&lt;<i>iface</i>&gt;: Interface, either <b>enif0</b> or <b>wanif0</b><br>
+</dd><dd>See "sys iface disp" for the list of available interfaces<br>
+&lt;<i>switch</i>&gt;: Switch setting, either <b>on</b> or <b>off</b><br>
+&lt;<i>ip-addr</i>&gt;: IP address of format xxx.xxx.xxx.xxx&lt;&lt;<br>
+&lt;<i>bits</i>&gt;: Number that indicates the number of bits of the subnet mask<br>
+&lt;<i>gw</i>&gt;: Gateway IP address of format xxx.xxx.xxx.xxx&lt;&lt;<br>
+&lt;<i>ether-addr</i>&gt;: Ethernet MAC Address of format xx:xx:xx:xx:xx:xx</dd></blockquote><p></p>
+
+<p>WARNING:  Many commands use the absence of a parameter to 
+display the current value of the command while a few set the value 
+to an indeterminate value!</p>
+
+<p>NOTE:  Commands from previous versions of the firmware are still 
+listed but are marked as DEFUNCT if they are no longer available.  
+Newer commands are marked with the version number of the version 
+of ZyNOS when they were created or modified.</p>
+
+<p><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr valign="TOP">
+    <td class="BGWhite"><a name="TopLevel"></a><h3><i>CI (Command Interface)</i> - Top Level Commands</h3></td>
+    <td align="RIGHT" class="BGWhite"><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#Top">TOP</a></td>
+  </tr>
+</tbody></table>
+<table border="0" cellpadding="2" cellspacing="2" width="100%">
+  <tbody><tr valign="TOP">
+    <td>?</td>
+    <td>List major commands (Not all commands are listed!)</td>
+  </tr>
+  <tr valign="TOP">
+    <td><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#bridge">bridge</a></td>
+    <td>List major <b>bridge</b> subcommands (Not all subcommands, if any, are listed!)</td>
+  </tr>
+  <tr valign="TOP">
+    <td><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#device">device</a></td>
+    <td>List major <b>device</b> subcommands (Not all subcommands, if any, are listed!)</td>
+  </tr>
+  <tr valign="TOP">
+    <td><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#dialer">dialer</a></td>
+    <td>List major <b>dialer</b> subcommands (Not all subcommands, if any, are listed!)</td>
+  </tr>
+  <tr valign="TOP">
+    <td><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#ether">ether</a></td>
+    <td>List major <b>ether</b> subcommands (Not all subcommands, if any, are listed!)</td>
+  </tr>
+  <tr valign="TOP">
+    <td>exit</td>
+    <td>Exit the Command Interface</td>
+  </tr>
+  <tr valign="TOP">
+    <td><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#hdap">hdap</a></td>
+    <td>List major <b>hdap</b> subcommands (Not all subcommands, if any, are listed!)</td>
+  </tr>
+  <tr valign="TOP">
+    <td><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#ip">ip</a></td>
+    <td>List major <b>ip</b> subcommands (Not all subcommands, if any, are listed!)</td>
+  </tr>
+  <tr valign="TOP">
+    <td><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#ipx">ipx</a></td>
+    <td>List major <b>ipx</b> subcommands (Not all subcommands, if any, are listed!)</td>
+  </tr>
+  <tr valign="TOP">
+    <td><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#isdn">isdn</a></td>
+    <td>List major <b>isdn</b> subcommands (Not all subcommands, if any, are listed!)</td>
+  </tr>
+  <tr valign="TOP">
+    <td><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#l2tp">l2tp</a></td>
+    <td>List major <b>l2tp</b> subcommands (Not all subcommands, if any, are listed!)</td>
+  </tr>
+  <tr valign="TOP">
+    <td><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#lan">lan</a></td>
+    <td>List major <b>lan</b> subcommands (Not all subcommands, if any, are listed!)</td>
+  </tr>
+  <tr valign="TOP">
+    <td><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#ppp">ppp</a></td>
+    <td>List major <b>ppp</b> subcommands (Not all subcommands, if any, are listed!)</td>
+  </tr>
+  <tr valign="TOP">
+    <td><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#radius">radius</a></td>
+    <td>List major <b>radius</b> subcommands (Not all subcommands, if any, are listed!)</td>
+  </tr>
+  <tr valign="TOP">
+    <td><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#snmp">snmp</a></td>
+    <td>List major <b>snmp</b> subcommands (Not all subcommands, if any, are listed!)</td>
+  </tr>
+  <tr valign="TOP">
+    <td><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#sys">sys</a></td>
+    <td>List major <b>sys</b> subcommands (Not all subcommands, if any, are listed!)</td>
+  </tr>
+  <tr valign="TOP">
+    <td><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#wan">wan</a></td>
+    <td>List major <b>wan</b> subcommands (Not all subcommands, if any, are listed!)</td>
+  </tr>
+</tbody></table></p><p></p>
+
+<p><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr valign="TOP">
+    <td class="BGWhite"><a name="bridge"></a><h3><i>BRIDGE</i> - Bridge Routing Related Subcommands</h3></td>
+    <td align="RIGHT" class="BGWhite"><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#Top">TOP</a></td>
+  </tr>
+</tbody></table>
+<table border="0" cellpadding="2" cellspacing="2" width="100%">
+<!-- bridge command -->
+<!-- blt subcommand -->
+  <tbody><tr valign="TOP">
+    <td rowspan="13">bri</td>
+    <td rowspan="5">blt</td>
+    <td colspan="2">disp</td>
+    <td>Display BLT counters</td>
+  </tr>
+  <tr valign="TOP">
+    <td>monitor</td>
+    <td>[&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set traffic monitor switch (Default is OFF)</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">reset</td>
+    <td>Reset BLT counters</td>
+  </tr>
+  <tr valign="TOP">
+    <td>time</td>
+    <td>[&lt;<i>timer</i>&gt;]</td>
+    <td>Display / Set BLT re-init interval timer (in seconds)</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">traffic</td>
+    <td>Display local LAN traffic table</td>
+  </tr>
+<!-- brt subcommand -->
+  <tr valign="TOP">
+    <td rowspan="2">brt</td>
+    <td colspan="2">disp</td>
+    <td>Display bridge route table</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">reset</td>
+    <td>Reset bridge route table</td>
+  </tr>
+<!-- cnt subcommand -->
+  <tr valign="TOP">
+    <td rowspan="2">cnt</td>
+    <td colspan="2">clear</td>
+    <td>Clear bridge routing statistics table</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">disp</td>
+    <td>Display bridge routing statistics table</td>
+  </tr>
+<!-- fcs subcommand -->
+  <tr valign="TOP">
+    <td colspan="3">fcs</td>
+    <td>Set bridge FCS control flag</td>
+  </tr>
+<!-- mode subcommand -->
+  <tr valign="TOP">
+    <td>mode</td>
+    <td colspan="2">[&lt;<i>mode</i>&gt;]</td>
+    <td>Display / Set LAN promiscious mode switch<br>
+<dd>mode = 0: On<br>
+</dd><dd>mode = 1: Off</dd></td>
+  </tr>
+<!-- stat subcommand -->
+  <tr valign="TOP">
+    <td rowspan="2">stat</td>
+    <td colspan="2">clear</td>
+    <td>Clear bridge packet statistics table</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">disp</td>
+    <td>Display bridge packet statistics table</td>
+  </tr>
+</tbody></table></p><p></p>
+
+<p><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr valign="TOP">
+    <td class="BGWhite"><a name="device"></a><h3><i>DEVICE</i> - Device Management Related Subcommands</h3></td>
+    <td align="RIGHT" class="BGWhite"><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#Top">TOP</a></td>
+  </tr>
+</tbody></table>
+<table border="0" cellpadding="2" cellspacing="2" width="100%">
+<!-- device command -->
+<!-- chan subcommand -->
+  <tbody><tr valign="TOP">
+    <td rowspan="4">device</td>
+    <td rowspan="3">chan</td>
+    <td>disp</td>
+    <td>&lt;<i>chan</i>&gt;</td>
+    <td>Display channel information</td>
+  </tr>
+  <tr valign="TOP">
+    <td>drop</td>
+    <td>&lt;<i>chan</i>&gt;</td>
+    <td>Drop a channel connection</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">name</td>
+    <td>Display available ethernet channel names</td>
+  </tr>
+  <tr valign="TOP">
+    <td>dial</td>
+    <td colspan="2">&lt;<i>node</i>&gt;</td>
+    <td>Dial to a remote node<br>
+<dd>node: 1 - 12</dd></td>
+  </tr>
+</tbody></table></p><p></p>
+
+<p><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr valign="TOP">
+    <td class="BGWhite"><a name="dialer"></a><h3><i>DIALER</i> - ISDN Dialer Related Subcommands</h3></td>
+    <td align="RIGHT" class="BGWhite"><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#Top">TOP</a></td>
+  </tr>
+</tbody></table>
+<table border="0" cellpadding="2" cellspacing="2" width="100%">
+<!-- dialer command -->
+<!-- cnt subcommand -->
+  <tbody><tr valign="TOP">
+    <td rowspan="6">dialer</td>
+    <td rowspan="2">cnt</td>
+    <td colspan="2">clear</td>
+    <td>Clear dialer statistic counter</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">disp</td>
+    <td>Display dialer statistic counter</td>
+  </tr>
+<!-- status subcommand -->
+  <tr valign="TOP">
+    <td colspan="3">status</td>
+    <td>Display ISDN channel status</td>
+  </tr>
+<!-- timeout subcommand -->
+  <tr valign="TOP">
+    <td rowspan="3">timeout</td>
+    <td>callback</td>
+    <td>&lt;<i>timeout</i>&gt;</td>
+    <td>Set callback timeout<br>
+<dd>timeout: 5 - 60 seconds</dd></td>
+  </tr>
+  <tr valign="TOP">
+    <td>digital</td>
+    <td>&lt;<i>timeout</i>&gt;</td>
+    <td>Set callback timeout<br>
+<dd>timeout: 5 - 300 seconds</dd></td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">disp</td>
+    <td>Display digital and callback timeout</td>
+  </tr>
+</tbody></table></p><p></p>
+
+<p><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr valign="TOP">
+    <td class="BGWhite"><a name="ether"></a><h3><i>ETHER</i> - Ethernet / LAN Debug Subcommands</h3></td>
+    <td align="RIGHT" class="BGWhite"><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#Top">TOP</a></td>
+  </tr>
+</tbody></table>
+<table border="0" cellpadding="2" cellspacing="2" width="100%">
+<!-- ether command -->
+<!-- config subcommand -->
+  <tbody><tr>
+    <td rowspan="15" valign="TOP">ether</td>
+    <td colspan="3" valign="TOP">config</td>
+    <td valign="TOP">Display ethernet driver configuration information</td>
+  </tr>
+<!-- debug subcommand -->
+  <tr>
+    <td rowspan="2" valign="TOP">debug</td>
+    <td valign="TOP">disp</td>
+    <td valign="TOP">&lt;<i>chan</i>&gt;</td>
+    <td valign="TOP">Display ethernet debug infomation<br>
+<div align="RIGHT">(* DEFUNCT *)</div></td>
+  </tr>
+  <tr>
+    <td valign="TOP">level</td>
+    <td valign="TOP">&lt;<i>chan</i>&gt; &lt;<i>level</i>&gt;</td>
+    <td valign="TOP">Set the ethernet debug log level<br>
+<dd>level = 0: Disable<br>
+</dd><dd>level = 1: Enable (Default)<br>
+<div align="RIGHT">(* DEFUNCT *)</div></dd></td>
+  </tr>
+<!-- driver subcommand -->
+  <tr>
+    <td rowspan="6" valign="TOP">driver</td>
+    <td rowspan="2" valign="TOP">cnt</td>
+    <td valign="TOP">disp &lt;<i>chan</i>&gt;</td>
+    <td valign="TOP">Display ethernet driver counters</td>
+  </tr>
+  <tr>
+    <td valign="TOP">clear &lt;<i>chan</i>&gt;</td>
+    <td valign="TOP">Clear ethernet driver counters</td>
+  </tr>
+  <tr>
+    <td valign="TOP">mac</td>
+    <td valign="TOP">&lt;<i>chan</i>&gt; &lt;<i>ether-addr</i>&gt;</td>
+    <td valign="TOP">Set LAN MAC address</td>
+  </tr>
+  <tr>
+    <td valign="TOP">reg</td>
+    <td valign="TOP">&lt;<i>chan</i>&gt;</td>
+    <td valign="TOP">Display ethernet hardware related registers</td>
+  </tr>
+  <tr>
+    <td valign="TOP">rxmod</td>
+    <td valign="TOP">&lt;<i>chan</i>&gt; &lt;<i>mode</i>&gt;</td>
+    <td valign="TOP">Set ethernet receive mode<br>
+<dd>mode = 1: Turn off receiving<br>
+</dd><dd>mode = 2: Receive only packets of this interface<br>
+</dd><dd>mode = 3: Mode 2 + broadcast<br>
+</dd><dd>mode = 5: Mode 2 + multicast<br>
+</dd><dd>mode = 6: All packets</dd></td>
+  </tr>
+  <tr>
+    <td valign="TOP">status</td>
+    <td valign="TOP">&lt;<i>chan</i>&gt;</td>
+    <td valign="TOP">Display status of the ethernet driver</td>
+  </tr>
+<!-- mac subcommand -->
+  <tr>
+    <td colspan="3" valign="TOP">mac</td>
+    <td valign="TOP">Set LAN MAC address (Only available via RS232 serial interface)</td>
+  </tr>
+<!-- pkttest subcommand -->
+  <tr>
+    <td rowspan="4" valign="TOP">pkttest</td>
+    <td valign="TOP">arp</td>
+    <td valign="TOP">&lt;<i>ip-addr</i>&gt;</td>
+    <td valign="TOP">&nbsp;</td>
+  </tr>
+  <tr>
+    <td rowspan="2" valign="TOP">disp</td>
+    <td valign="TOP"><nobr>event &lt;<i>chan</i>&gt; &lt;switch&gt;</nobr></td>
+    <td valign="TOP">&nbsp;</td>
+  </tr>
+  <tr>
+    <td valign="TOP">packet &lt;1|2|3&gt;</td>
+    <td valign="TOP">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="TOP">sap</td>
+    <td valign="TOP">&nbsp;</td>
+  </tr>
+<!-- version subcommand -->
+  <tr>
+    <td colspan="3" valign="TOP">version</td>
+    <td valign="TOP">Display ethernet software version</td>
+  </tr>
+</tbody></table></p><p></p>
+
+<p><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr valign="TOP">
+    <td class="BGWhite"><a name="hdap"></a><h3><i>HDAP</i> - HDAP Related Subcommands</h3></td>
+    <td align="RIGHT" class="BGWhite"><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#Top">TOP</a></td>
+  </tr>
+</tbody></table>
+<table border="0" cellpadding="2" cellspacing="2" width="100%">
+<!-- hdap command -->
+<!-- debug subcommand -->
+  <tbody><tr valign="TOP">
+    <td rowspan="2">hdap</td>
+    <td>debug</td>
+    <td colspan="2">[&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set HDAP debug mode switch</td>
+  </tr>
+<!-- reset -->
+  <tr valign="TOP">
+    <td colspan="3">reset</td>
+    <td>Reset HDAP flag</td>
+  </tr>
+</tbody></table></p><p></p>
+
+<p><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr valign="TOP">
+    <td class="BGWhite"><a name="ip"></a><h3><i>IP</i> - TCP/IP Protocol Subcommands</h3></td>
+    <td align="RIGHT" class="BGWhite"><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#Top">TOP</a></td>
+  </tr>
+</tbody></table>
+<table border="0" cellpadding="2" cellspacing="2" width="100%">
+<!-- ip command -->
+<!-- address subcommand -->
+  <tbody><tr>
+    <td rowspan="99" valign="TOP">ip</td>
+    <td valign="TOP">address</td>
+    <td colspan="2" valign="TOP">[&lt;<i>ip-addr</i>&gt;]</td>
+    <td valign="TOP">Display / Set host IP address</td>
+  </tr>
+<!-- adj subcommand -->
+  <tr>
+    <td valign="TOP">adj</td>
+    <td colspan="2" valign="TOP">&lt;<i>iface</i>&gt; [&lt;<i>value</i>&gt;]</td>
+    <td valign="TOP">Display / Set TCP MSS (Maximum Segment Size) on an 
+interface<br>
+<div align="RIGHT">(Since ZyNOS V3.25 (M.01))</div></td>
+  </tr>
+<!-- adjmss subcommand -->
+  <tr>
+    <td valign="TOP">adjmss</td>
+    <td colspan="2" valign="TOP">[&lt;<i>value</i>&gt;]</td>
+    <td valign="TOP">Display / Set TCP MSS (Maximum Segment Size)<br>
+<div align="RIGHT">(Since ZyNOS V3.25 (M.01))</div></td>
+  </tr>
+<!-- alias subcommand -->
+  <tr>
+    <td valign="TOP">alias</td>
+    <td colspan="2" valign="TOP">&lt;<i>iface</i>&gt;</td>
+    <td valign="TOP">Create a new alias for interface (Default 
+existing aliases are enif0:0 and enif0:1)</td>
+  </tr>
+<!-- aliasdis subcommand -->
+  <tr>
+    <td valign="TOP">aliasdis</td>
+    <td colspan="2" valign="TOP">&lt;<i>flag</i>&gt;</td>
+    <td valign="TOP">Enable / Disable routing between aliased interfaces<br>
+<dd>flag = 0: Disable<br>
+</dd><dd>flag = 1: Enable</dd></td>
+  </tr>
+<!-- antip subcommand -->
+  <tr>
+    <td valign="TOP">antip</td>
+    <td colspan="2" valign="TOP">[&lt;<i>flag</i>&gt;]</td>
+    <td valign="TOP">Display / Set IP antiprobe status<br>
+<dd>flag = 0: Disable<br>
+</dd><dd>flag = 1: Enable</dd></td>
+  </tr>
+<!-- arp subcommand -->
+  <tr>
+    <td rowspan="7" valign="TOP">arp</td>
+    <td valign="TOP">add</td>
+    <td valign="TOP">&lt;<i>hostid</i>&gt; ether &lt;<i>ether-addr</i>&gt;</td>
+    <td valign="TOP">Add ARP entry to cache</td>
+  </tr>
+  <tr>
+    <td valign="TOP">drop</td>
+    <td valign="TOP">&lt;<i>hostid</i>&gt; &lt;<i>ether</i>&gt;</td>
+    <td valign="TOP">Drop ARP entry from cache</td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="TOP">flush</td>
+    <td valign="TOP">Flush ARP cache</td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="TOP">publish</td>
+    <td valign="TOP">Add proxy ARP</td>
+  </tr>
+  <tr>
+    <td valign="TOP">reply</td>
+    <td valign="TOP">[&lt;<i>value</i>&gt;]</td>
+    <td valign="TOP">Display / Set ARP reply between LAN and WAN 
+ethernet interface<br>
+<dd>value = 0: Disable<br>
+</dd><dd>value = 1: Enable<br>
+<div align="RIGHT">(Since ZyNOS V3.25 (M.01))</div></dd></td>
+  </tr>
+  <tr>
+    <td valign="TOP">resolve</td>
+    <td valign="TOP">&lt;<i>hostid</i>&gt;</td>
+    <td valign="TOP">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="TOP">status</td>
+    <td valign="TOP">Display IP ARP status</td>
+  </tr>
+<!-- dhcp subcommand -->
+  <tr>
+    <td rowspan="13" valign="TOP">dhcp</td>
+    <td rowspan="10" valign="TOP">&lt;<i>iface</i>&gt;&nbsp;server</td>
+    <td valign="TOP">arpcount &lt;<i>num</i>&gt;</td>
+    <td valign="TOP">&nbsp;</td>
+  </tr>
+  <tr>
+    <td valign="TOP">dnsserver &lt;<i>dnsIP1</i>&gt; [&lt;<i>dnsIP2</i>&gt;]</td>
+    <td valign="TOP">Set DHCP client's DNS server(s)<br>
+(Default is 0.0.0.0 which refers to the values obtained from the 
+WAN interface)</td>
+  </tr>
+  <tr>
+    <td valign="TOP">gateway &lt;<i>gw</i>&gt;</td>
+    <td valign="TOP">Set DHCP client's gateway IP address<br>
+(Default is the router's IP address)</td>
+  </tr>
+  <tr>
+    <td valign="TOP">hostname &lt;<i>prefix</i>&gt;</td>
+    <td valign="TOP">Set DHCP client's hostname prefix</td>
+  </tr>
+  <tr>
+    <td valign="TOP">leasetime &lt;<i>period</i>&gt;</td>
+    <td valign="TOP">Set DHCP client's lease time</td>
+  </tr>
+  <tr>
+    <td valign="TOP">netmask &lt;<i>netmask</i>&gt;</td>
+    <td valign="TOP">Set DHCP client's netmask</td>
+  </tr>
+  <tr>
+    <td valign="TOP">pool &lt;<i>start</i>&gt; &lt;<i>num</i>&gt;</td>
+    <td valign="TOP">Set DHCP server's starting IP address and 
+the number of addresses in the DHCP table</td>
+  </tr>
+  <tr>
+    <td valign="TOP">rebindtime &lt;<i>period</i>&gt;</td>
+    <td valign="TOP">&nbsp;</td>
+  </tr>
+  <tr>
+    <td valign="TOP">renewaltime &lt;<i>period</i>&gt;</td>
+    <td valign="TOP">&nbsp;</td>
+  </tr>
+  <tr>
+    <td valign="TOP">reset</td>
+    <td valign="TOP">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="TOP">&lt;<i>iface</i>&gt; status</td>
+    <td valign="TOP">Display interface DHCP information</td>
+  </tr>
+  <tr>
+    <td rowspan="2" valign="TOP">&lt;<i>iface</i>&gt; client</td>
+    <td valign="TOP">release</td>
+    <td valign="TOP">Release DHCP client IP address</td>
+  </tr>
+  <tr>
+    <td valign="TOP">renew</td>
+    <td valign="TOP">Renew DHCP client IP address</td>
+  </tr>
+<!-- dns subcommand -->
+  <tr>
+    <td rowspan="4" valign="TOP">dns</td>
+    <td valign="TOP">query</td>
+    <td valign="TOP">status</td>
+    <td valign="TOP">Display DNS query status</td>
+  </tr>
+  <tr>
+    <td rowspan="2" valign="TOP">stats</td>
+    <td valign="TOP">disp</td>
+    <td valign="TOP">Display DNS active settings and statistics</td>
+  </tr>
+  <tr>
+    <td valign="TOP">clear</td>
+    <td valign="TOP">Clear DNS statistics</td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="TOP">table</td>
+    <td valign="TOP">Display DNS proxy table</td>
+  </tr>
+<!-- httpd subcommand -->
+  <tr>
+    <td colspan="3" valign="TOP">httpd</td>
+    <td valign="TOP">&nbsp;</td>
+  </tr>
+<!-- icmp subcommand -->
+  <tr>
+    <td rowspan="6" valign="TOP">icmp</td>
+    <td valign="TOP">check</td>
+    <td valign="TOP">[&lt;cmd|rsp|indication&gt;]</td>
+    <td valign="TOP">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="TOP">data</td>
+    <td valign="TOP">&nbsp;</td>
+  </tr>
+  <tr>
+    <td valign="TOP">echo</td>
+    <td valign="TOP">[&lt;<i>switch</i>&gt;]</td>
+    <td valign="TOP">Display / Set ICMP echo responce switch</td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="TOP">status</td>
+    <td valign="TOP">Display ICMP statistic counter</td>
+  </tr>
+  <tr>
+    <td valign="TOP">trace</td>
+    <td valign="TOP">[&lt;<i>switch</i>&gt;]</td>
+    <td valign="TOP">Display / Set ICMP trace debugging switch</td>
+  </tr>
+  <tr>
+    <td valign="TOP">discovery</td>
+    <td valign="TOP">&lt;<i>iface</i>&gt; [&lt;<i>switch</i>&gt;]</td>
+    <td valign="TOP">Display / Set ICMP router discovery response switch<br>
+<dd>(Only LAN interfaces may be selected)</dd></td>
+  </tr>
+<!-- ifconfig subcommand -->
+  <tr>
+    <td valign="TOP">ifconfig</td>
+    <td colspan="2" valign="TOP">[&lt;<i>iface</i>[/&lt;<i>bits</i>&gt;] [&lt;<i>gw</i>&gt;]]</td>
+    <td valign="TOP">Display ifconfig for all interfaces or nominated 
+interface.  Optionally configure the nominated interface with the 
+number of bits to specify the subnet mask and/or the gateway IP 
+address</td>
+  </tr>
+<!-- igmp subcommand -->
+  <tr>
+    <td rowspan="6" valign="TOP">igmp</td>
+    <td valign="TOP">debug</td>
+    <td valign="TOP">[&lt;<i>level</i>&gt;]
+    </td><td valign="TOP">Display / Set IGMP debug level</td>
+  </tr>
+  <tr>
+    <td valign="TOP">forwardall
+    </td><td valign="TOP">[&lt;<i>switch</i>&gt;]
+    </td><td valign="TOP">Display / Set IGMP forwarding to all interfaces switch</td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="TOP">iface</td>
+    <td valign="TOP">&nbsp;</td>
+  </tr>
+  <tr>
+    <td valign="TOP">querier</td>
+    <td valign="TOP">[&lt;<i>switch</i>&gt;]
+    </td><td valign="TOP">Display / Set IGMP becoming a non-querier switch</td>
+  </tr>
+  <tr>
+    <td valign="TOP">robustness</td>
+    <td valign="TOP">[&lt;<i>variable</i>&gt;]
+    </td><td valign="TOP">Display / Set IGMP robustness variable</td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="TOP">status</td>
+    <td valign="TOP">Display IGMP settings on all interfaces</td>
+  </tr>
+<!-- nat subcommand -->
+  <tr>
+    <td rowspan="7" valign="TOP">nat</td>
+    <td colspan="2" valign="TOP">disp</td>
+    <td valign="TOP">Display Single User Account (SUA) statistic</td>
+  </tr>
+  <tr>
+    <td valign="TOP">iface</td>
+    <td valign="TOP">&lt;<i>iface</i>&gt;</td>
+    <td valign="TOP">Display dynamic NAT table by interface</td>
+  </tr>
+  <tr>
+    <td valign="TOP">loopback</td>
+    <td valign="TOP">[&lt;<i>switch</i>&gt;]</td>
+    <td valign="TOP">Display / Set local LAN user's ability to use Internet 
+IP address to access internal servers on the LAN switch</td>
+  </tr>
+  <tr>
+    <td valign="TOP">set</td>
+    <td valign="TOP">[&lt;<i>switch</i>&gt;]</td>
+    <td valign="TOP">Set static NAT entry for this port on IP interface<br>
+<div align="RIGHT">(Since ZyNOS V3.50 (M.00))</div></td>
+  </tr>
+  <tr>
+    <td rowspan="3" valign="TOP">timeout</td>
+    <td valign="TOP">generic [&lt;<i>timeout</i>&gt;]</td>
+    <td valign="TOP">Display / Set UDP NAT timeout time (in seconds)<br>
+(Default is 180 seconds)</td>
+  </tr>
+  <tr>
+    <td valign="TOP">tcp [&lt;<i>timeout</i>&gt;]</td>
+    <td valign="TOP">Display / Set TCP connection phase timeout time (in seconds)<br>
+(Default is 270 seconds)</td>
+  </tr>
+  <tr>
+    <td valign="TOP">tcpother [&lt;<i>timeout</i>&gt;]</td>
+    <td valign="TOP">Display / Set TCP data phase timeout time (in seconds)<br>
+(Default is 9000 seconds)</td>
+  </tr>
+<!-- ping subcommand -->
+  <tr>
+    <td valign="TOP">ping</td>
+    <td colspan="2" valign="TOP">&lt;<i>host-id</i>&gt;</td>
+    <td valign="TOP">Ping remote host by name or IP address</td>
+  </tr>
+<!-- rip subcommand -->
+  <tr>
+    <td rowspan="9" valign="TOP">rip</td>
+    <td valign="TOP">accept</td>
+    <td valign="TOP">&lt;<i>gw</i>&gt;</td>
+    <td valign="TOP">Drop an entry from the RIP information</td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="TOP">activate</td>
+    <td valign="TOP">Activate the RIP listener list</td>
+  </tr>
+  <tr>
+    <td valign="TOP">dialin_user</td>
+    <td valign="TOP">[&lt;<i>direction</i>&gt;]</td>
+    <td valign="TOP">Display / Set dialin user's RIP direction<br>
+<dd>direction = show: Show the current RIP setting<br>
+</dd><dd>direction = in: Set inbound RIP direction
+</dd><dd>direction = out: Set outbound RIP direction<br>
+</dd><dd>direction = both: Set bidirectional RIP<br>
+</dd><dd>direction = none: Disable RIP</dd></td>
+  </tr>
+  <tr>
+    <td valign="TOP">merge</td>
+    <td valign="TOP">[&lt;<i>switch</i>&gt;]</td>
+    <td valign="TOP">Display / Set RIP merging switch</td>
+  </tr>
+  <tr>
+    <td valign="TOP">mode</td>
+    <td valign="TOP">&lt;<i>iface</i>&gt; [&lt;<i>direction</i>&gt;] [&lt;<i>mode</i>&gt;]</td>
+    <td valign="TOP">Set RIP direction and mode<br>
+<dd>direction: in | out<br>
+</dd><dd>mode: 0 - 3</dd></td>
+  </tr>
+  <tr>
+    <td valign="TOP">refuse</td>
+    <td valign="TOP">&lt;<i>gw</i>&gt;</td>
+    <td valign="TOP">Add an entry to the RIP refuse list</td>
+  </tr>
+  <tr>
+    <td valign="TOP">reverse</td>
+    <td valign="TOP">[&lt;<i>switch</i>&gt;]</td>
+    <td valign="TOP">Display / Set RIP Poisoned Reverse switch</td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="TOP">status</td>
+    <td valign="TOP">Display RIP statistic counters</td>
+  </tr>
+  <tr>
+    <td valign="TOP">trace</td>
+    <td valign="TOP">[&lt;<i>flag</i>&gt;]</td>
+    <td valign="TOP">Display / Set RIP trace<br>
+<dd>flag = 0: Off<br>
+</dd><dd>flag = 1: On</dd></td>
+  </tr>
+<!-- route subcommand -->
+  <tr>
+    <td rowspan="8" valign="TOP">route</td>
+    <td valign="TOP">add</td>
+    <td valign="TOP"><nobr>&lt;<i>ip-addr</i>&gt;[/&lt;<i>bits</i>&gt;] &lt;<i>gw</i>&gt; [&lt;<i>metric</i>&gt;]</nobr></td>
+    <td valign="TOP">Add route</td>
+  </tr>
+  <tr>
+    <td valign="TOP">addprivate</td>
+    <td valign="TOP"><nobr>&lt;<i>ip-addr</i>&gt;[/&lt;<i>bits</i>&gt;] &lt;<i>gw</i>&gt; [&lt;<i>metric</i>&gt;]</nobr></td>
+    <td valign="TOP">Add private route</td>
+  </tr>
+  <tr>
+    <td valign="TOP">drop</td>
+    <td valign="TOP">&lt;<i>ip-addr</i>&gt;[/&lt;<i>bits</i>&gt;]
+    </td><td valign="TOP">Drop a route</td>
+  </tr>
+  <tr>
+    <td rowspan="2" valign="TOP">errcnt</td>
+    <td valign="TOP">clear</td>
+    <td valign="TOP">Clear routing statistic counters</td>
+  </tr>
+  <tr>
+    <td valign="TOP">disp</td>
+    <td valign="TOP">Display routing statistic counters</td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="TOP">flush</td>
+    <td valign="TOP">Flush route table</td>
+  </tr>
+  <tr>
+    <td valign="TOP">lookup</td>
+    <td valign="TOP">&lt;<i>ip-addr</i>&gt;[/&lt;<i>bits</i>&gt;]
+    </td><td valign="TOP">Show host route table</td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="TOP">status</td>
+    <td valign="TOP">Display routing table</td>
+  </tr>
+<!-- status subcommand -->
+  <tr>
+    <td colspan="3" valign="TOP">status</td>
+    <td valign="TOP">Display IP statistic counters</td>
+  </tr>
+<!-- sua subcommand -->
+  <tr>
+    <td rowspan="3" valign="TOP">sua</td>
+    <td valign="TOP">iface</td>
+    <td valign="TOP">&lt;<i>iface</i>&gt;</td>
+    <td valign="TOP"><div align="RIGHT">(* DEFUNCT *)</div></td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="TOP">disp</td>
+    <td valign="TOP">display single user account statistic<br>
+<div align="RIGHT">(* DEFUNCT *)</div></td>
+  </tr>
+  <tr>
+    <td valign="TOP">set</td>
+    <td valign="TOP">&lt;<i>ip-addr</i>&gt; &lt;<i>port</i>&gt;</td>
+    <td valign="TOP"><div align="RIGHT">(* DEFUNCT *)</div></td>
+  </tr>
+<!-- tcp subcommand -->
+  <tr>
+    <td rowspan="12" valign="TOP">tcp</td>
+    <td valign="TOP">ceiling</td>
+    <td valign="TOP">[&lt;<i>value</i>&gt;]</td>
+    <td valign="TOP">Display /Set TCP maximum Round Trip Time (RTT)</td>
+  </tr>
+  <tr>
+    <td valign="TOP">floor</td>
+    <td valign="TOP">[&lt;<i>value</i>&gt;]</td>
+    <td valign="TOP">Display / Set TCP minimum RTT</td>
+  </tr>
+  <tr>
+    <td valign="TOP">kick</td>
+    <td valign="TOP">&lt;<i>controlblock</i>&gt;</td>
+    <td valign="TOP">&nbsp;</td>
+  </tr>
+  <tr>
+    <td valign="TOP">irtt</td>
+    <td valign="TOP">[&lt;<i>value</i>&gt;]</td>
+    <td valign="TOP">Display / Set TCP default init RTT</td>
+  </tr>
+  <tr>
+    <td valign="TOP">limit</td>
+    <td valign="TOP">[&lt;<i>value</i>&gt;]</td>
+    <td valign="TOP">Display / Set TCP output window size limit</td>
+  </tr>
+  <tr>
+    <td valign="TOP">mss</td>
+    <td valign="TOP">[&lt;<i>size</i>&gt;]</td>
+    <td valign="TOP">Display / Set TCP input MSS size</td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="TOP">reset</td>
+    <td valign="TOP">&nbsp;</td>
+  </tr>
+  <tr>
+    <td valign="TOP">rtt</td>
+    <td valign="TOP">&lt;<i>controlblock</i>&gt;</td>
+    <td valign="TOP">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="TOP">status</td>
+    <td valign="TOP">Display TCP statistic counters, active 
+connections and listening sockets (NetStat)</td>
+  </tr>
+  <tr>
+    <td valign="TOP">syndata</td>
+    <td valign="TOP">[&lt;<i>switch</i>&gt;]</td>
+    <td valign="TOP">Display / Set TCP syndata piggyback switch</td>
+  </tr>
+  <tr>
+    <td valign="TOP">trace</td>
+    <td valign="TOP">[&lt;<i>switch</i>&gt;]</td>
+    <td valign="TOP">Display / Set trace debugging switch</td>
+  </tr>
+  <tr>
+    <td valign="TOP">window</td>
+    <td valign="TOP">[&lt;<i>size</i>&gt;]</td>
+    <td valign="TOP">Display / Set TCP input window size limit</td>
+  </tr>
+<!-- tftp subcommand -->
+  <tr>
+    <td rowspan="2" valign="TOP">tftp</td>
+    <td colspan="2" valign="TOP">stats</td>
+    <td valign="TOP">Display TFTP statistics</td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="TOP">support</td>
+    <td valign="TOP">Display confirmation of TFTP support</td>
+  </tr>
+<!-- tredir subcommand -->
+  <tr>
+    <td rowspan="9" valign="TOP">tredir</td>
+    <td colspan="2" valign="TOP">failcount</td>
+    <td valign="TOP">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="TOP">partner</td>
+    <td valign="TOP">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="TOP">target</td>
+    <td valign="TOP">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="TOP">timeout</td>
+    <td valign="TOP">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="TOP">checktime</td>
+    <td valign="TOP">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="TOP">active</td>
+    <td valign="TOP">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="TOP">save</td>
+    <td valign="TOP">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="TOP">disp</td>
+    <td valign="TOP">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2" valign="TOP">debug</td>
+    <td valign="TOP">&nbsp;</td>
+  </tr>
+<!-- udp subcommand -->
+  <tr>
+    <td valign="TOP">udp</td>
+    <td colspan="2" valign="TOP">status</td>
+    <td valign="TOP">Display UDP statistics and control blocks</td>
+  </tr>
+<!-- xparent subcommand -->
+  <tr>
+    <td rowspan="3" valign="TOP">xparent</td>
+    <td valign="TOP">break</td>
+    <td valign="TOP">&lt;<i>iface</i>&gt;</td>
+    <td valign="TOP">Detach this interface by breaking any transparent 
+bridging with other interfaces</td>
+  </tr>
+  <tr>
+    <td valign="TOP">join</td>
+    <td valign="TOP">&lt;<i>iface1</i>&gt; [&lt;<i>iface2</i>&gt;]</td>
+    <td valign="TOP">Display interfaces that are joined in a transparent 
+bridge with interface 1.  If specified, join interface 2 in a 
+transparent bridge with interface 1</td>
+  </tr>
+</tbody></table></p><p></p>
+
+<p><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr valign="TOP">
+    <td class="BGWhite"><a name="ipx"></a><h3><i>IPX</i> - IPX Related Subcommands</h3></td>
+    <td align="RIGHT" class="BGWhite"><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#Top">TOP</a></td>
+  </tr>
+</tbody></table>
+<table border="0" cellpadding="2" cellspacing="2" width="100%">
+<!-- ipx command -->
+<!-- ifconfig subcommand -->
+  <tbody><tr valign="TOP">
+    <td rowspan="22">ipx</td>
+    <td>ifconfig</td>
+    <td colspan="2"><nobr>&lt;<i>name</i>&gt; &lt;<i>frm</i>&gt; &lt;<i>net</i>&gt; 
+&lt;<i>age</i>&gt; &lt;<i>hops</i>&gt; &lt;<i>ticks</i>&gt; 
+&lt;<i>seed_route</i>&gt;</nobr></td>
+    <td>Set the network parameters to iface and add IPX route to RIP table</td>
+  </tr>
+<!-- rip subcommand -->
+  <tr valign="TOP">
+    <td rowspan="3">rip</td>
+    <td colspan="2">err</td>
+    <td>Display RIP error counter</td>
+  </tr>
+  <tr valign="TOP">
+    <td>req</td>
+    <td>&lt;<i>net</i>&gt; [&lt;<i>rni</i>&gt;]</td>
+    <td>RIP request</td>
+  </tr>
+  <tr valign="TOP">
+    <td>rsp</td>
+    <td>&lt;<i>if-name</i>&gt; &lt;<i>frm</i>&gt; &lt;<i>rni</i>&gt;</td>
+    <td>RIP response</td>
+  </tr>
+<!-- route subcommand -->
+  <tr valign="TOP">
+    <td rowspan="6">route</td>
+    <td>add</td>
+    <td><nobr>&lt;<i>dest</i>&gt; &lt;<i>gw</i>&gt; &lt;<i>gw-node</i>&gt; 
+&lt;<i>hop</i>&gt; &lt;<i>ticks</i>&gt; &lt;<i>age</i>&gt; 
+&lt;<i>rni</i>&gt;</nobr></td>
+    <td>Add an IPX route</td>
+  </tr>
+  <tr valign="TOP">
+    <td rowspan="2">cnt</td>
+    <td>clear</td>
+    <td>Clear IPX route error counter</td>
+  </tr>
+  <tr valign="TOP">
+    <td>disp</td>
+    <td>Display IPX route error counter</td>
+  </tr>
+  <tr valign="TOP">
+    <td>drop</td>
+    <td>&lt;<i>network</i>&gt; [&lt;<i>rni</i>&gt;]</td>
+    <td>Drop the remote node route</td>
+  </tr>
+  <tr valign="TOP">
+    <td>flush</td>
+    <td>&lt;<i>rni</i>&gt; &lt;<i>status</i>&gt;</td>
+    <td>Flush the remote node</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">stat</td>
+    <td>Display IPX routing table</td>
+  </tr>
+<!-- sap subcommand -->
+  <tr valign="TOP">
+    <td rowspan="8">sap</td>
+    <td>add</td>
+    <td>&lt;name&gt;&lt;type&gt;&lt;network&gt;&lt;socket&gt;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr valign="TOP">
+    <td>cnt</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr valign="TOP">
+    <td>drop</td>
+    <td>&lt;type&gt;&lt;network&gt;&lt;node&gt;&lt;socket&gt;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr valign="TOP">
+    <td rowspan="2">flush</td>
+    <td>clear</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr valign="TOP">
+    <td>disp</td>
+    <td>Display SAP error counter</td>
+  </tr>
+  <tr valign="TOP">
+    <td>req</td>
+    <td>&lt;<i>net</i>&gt; &lt;<i>rn</i>&gt;</td>
+    <td>IPX SAP request</td>
+  </tr>
+  <tr valign="TOP">
+    <td>rsp</td>
+    <td>&lt;<i>if</i>&gt; &lt;<i>frame</i>&gt; &lt;<i>type</i>&gt;</td>
+    <td>IPX SAP response</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">stat</td>
+    <td>Display SAP routing table</td>
+  </tr>
+<!-- util subcommand -->
+  <tr valign="TOP">
+    <td rowspan="4">util</td>
+    <td rowspan="2">cnt</td>
+    <td>clear</td>
+    <td>Clear IPX utility error counter</td>
+  </tr>
+  <tr valign="TOP">
+    <td>disp</td>
+    <td>Display IPX utility error counter</td>
+  </tr>
+  <tr valign="TOP">
+    <td>rtn</td>
+    <td>[&lt;<i>num</i>&gt;]</td>
+    <td>Display / Set maximum number of IPX routes</td>
+  </tr>
+  <tr valign="TOP">
+    <td>sapn</td>
+    <td>[&lt;<i>num</i>&gt;]</td>
+    <td>Display / Set maximum number of SAP routes</td>
+  </tr>
+</tbody></table></p><p></p>
+
+<p><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr valign="TOP">
+    <td class="BGWhite"><a name="isdn"></a><h3><i>ISDN</i> - ISDN Related Subcommands</h3></td>
+    <td align="RIGHT" class="BGWhite"><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#Top">TOP</a></td>
+  </tr>
+</tbody></table>
+<table border="0" cellpadding="2" cellspacing="2" width="100%">
+<!-- isdn command -->
+<!-- astring subcommand -->
+  <tbody><tr valign="TOP">
+    <td rowspan="29">isdn</td>
+    <td rowspan="2">atring</td>
+    <td>clear</td>
+    <td>[ch-name]</td>
+    <td>Clear AT command ring buffer history</td>
+  </tr>
+  <tr valign="TOP">
+    <td>disp</td>
+    <td>[ch-name]</td>
+    <td>Display AT command ring buffer history</td>
+  </tr>
+<!-- callback subcommand -->
+  <tr valign="TOP">
+    <td rowspan="2">callback</td>
+    <td>speedyCLID</td>
+    <td>[on|off]</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr valign="TOP">
+    <td>timeout</td>
+    <td>[&lt;<i>value</i>&gt;]</td>
+    <td>Display / Set callback timeout<br>
+<dd>value: 1 - 60</dd></td>
+  </tr>
+<!-- config subcommand -->
+  <tr valign="TOP">
+    <td colspan="3">config</td>
+    <td>Display NDIS config block, board, line, channel</td>
+  </tr>
+<!-- event subcommand -->
+  <tr valign="TOP">
+    <td rowspan="2">event</td>
+    <td colspan="2">clear</td>
+    <td>Clear ISDN event</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">disp</td>
+    <td>Display ISDN event</td>
+  </tr>
+<!-- func subcommand -->
+  <tr valign="TOP">
+    <td>func</td>
+    <td colspan="2">redir</td>
+    <td>Enter the modem redirect mode (For P128IMH only)</td>
+  </tr>
+<!-- fw subcommand -->
+  <tr valign="TOP">
+    <td rowspan="3">fw</td>
+    <td rowspan="2">cnt</td>
+    <td>clear</td>
+    <td>Clear ISDN counters</td>
+  </tr>
+  <tr valign="TOP">
+    <td>disp</td>
+    <td>Display ISDN counters</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ana</td>
+    <td>[on|off|dump]</td>
+    <td>Turn on/off isdn fw epa trace and collect epa trace</td>
+  </tr>
+<!-- init subcommand -->
+  <tr valign="TOP">
+    <td>init</td>
+    <td colspan="2">[set|clear]</td>
+    <td>&nbsp;</td>
+  </tr>
+<!-- is subcommand -->
+  <tr valign="TOP">
+    <td>is</td>
+    <td colspan="2">[ch-name]</td>
+    <td>Set channel in-service</td>
+  </tr>
+<!-- loop subcommand -->
+  <tr valign="TOP">
+    <td>loop</td>
+    <td colspan="2">&lt;isdn #&gt;</td>
+    <td>ISDN loop back test</td>
+  </tr>
+<!-- map subcommand -->
+  <tr valign="TOP">
+    <td colspan="3">map</td>
+    <td>Display ISDN map</td>
+  </tr>
+<!-- oos subcommand -->
+  <tr valign="TOP">
+    <td>oos</td>
+    <td colspan="2">[ch-name]</td>
+    <td>Set channel out-of-service</td>
+  </tr>
+<!-- prtl subcommand -->
+  <tr valign="TOP">
+    <td>prtl</td>
+    <td colspan="2">[ch-name] [level]</td>
+    <td>Print channel information</td>
+  </tr>
+<!-- reset subcommand -->
+  <tr valign="TOP">
+    <td colspan="3">reset</td>
+    <td>&nbsp;</td>
+  </tr>
+<!-- script subcommand -->
+  <tr valign="TOP">
+    <td>script</td>
+    <td colspan="2">[ch-name]</td>
+    <td>&nbsp;</td>
+  </tr>
+<!-- set subcommand -->
+  <tr valign="TOP">
+    <td rowspan="2">set</td>
+    <td>american</td>
+    <td><nobr>[switch] [dn1] [spid1] [dn2] [spid2]</nobr></td>
+    <td>Save phone number to SPT in American version</td>
+  </tr>
+  <tr valign="TOP">
+    <td>european</td>
+    <td>[B-usage] [isdn data] [dial prefix]</td>
+    <td>Save phone number to SPT in European version</td>
+  </tr>
+<!-- status subcommand -->
+  <tr valign="TOP">
+    <td colspan="3">status</td>
+    <td>Display ISDN link status</td>
+  </tr>
+<!-- test subcommand -->
+  <tr valign="TOP">
+    <td rowspan="6">test</td>
+    <td>dial</td>
+    <td>[ch-name] [ph#]</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">disp</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr valign="TOP">
+    <td>drop</td>
+    <td>[ch-name]</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr valign="TOP">
+    <td>send</td>
+    <td>[ch-name] [size] [ms] [times]</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">static</td>
+    <td>Display packet and Octet receive and transmit</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">stop</td>
+    <td>&nbsp;</td>
+  </tr>
+<!-- version subcommand -->
+  <tr valign="TOP">
+    <td colspan="3">version</td>
+    <td>Display ISDN version</td>
+  </tr>
+</tbody></table></p><p></p>
+
+<p><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr valign="TOP">
+    <td class="BGWhite"><a name="l2tp"></a><h3><i>L2TP</i> - L2TP Related Subcommands</h3></td>
+    <td align="RIGHT" class="BGWhite"><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#Top">TOP</a></td>
+  </tr>
+</tbody></table>
+<table border="0" cellpadding="2" cellspacing="2" width="100%">
+<!-- l2tp command -->
+<!-- debug subcommand -->
+  <tbody><tr valign="TOP">
+    <td rowspan="7">l2tp</td>
+    <td>debug</td>
+    <td colspan="3">&lt;<i>level</i>&gt;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr valign="TOP">
+    <td>endpoint</td>
+    <td colspan="3">disp</td>
+    <td>Display L2TP endpoint</td>
+  </tr>
+  <tr valign="TOP">
+    <td>hide</td>
+    <td colspan="3">[&lt;<i>flag</i>&gt;]</td>
+    <td>Display / Set hide switch<br>
+<dd>flag = 0: Off<br>
+</dd><dd>flag = 1: On</dd></td>
+  </tr>
+  <tr valign="TOP">
+    <td>realm</td>
+    <td colspan="3">[&lt;<i>value</i>&gt;]</td>
+    <td>Display / Set realm<br>
+<dd>value: 0 - 9</dd></td>
+  </tr>
+  <tr valign="TOP">
+    <td>rxtimeout</td>
+    <td colspan="3">[&lt;<i>value</i>&gt;]</td>
+    <td>Display / Set receiver timeout<br>
+<dd>value: 200 - 2000 msec</dd></td>
+  </tr>
+  <tr valign="TOP">
+    <td>tunnel</td>
+    <td colspan="3">[&lt;<i>id</i>&gt;]</td>
+    <td>Display / Set tunnel ID<br>
+<dd>id: 1 - 8</dd></td>
+  </tr>
+  <tr valign="TOP">
+    <td>window</td>
+    <td colspan="3">[&lt;<i>size</i>&gt;]</td>
+    <td>Display / Set window size<br>
+<dd>size: 0 - 23352</dd></td>
+  </tr>
+</tbody></table></p><p></p>
+
+<p><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr valign="TOP">
+    <td class="BGWhite"><a name="lan"></a><h3><i>LAN</i> - LAN Related Subcommands</h3></td>
+    <td align="RIGHT" class="BGWhite"><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#Top">TOP</a></td>
+  </tr>
+</tbody></table>
+<table border="0" cellpadding="2" cellspacing="2" width="100%">
+<!-- lan command -->
+<!-- cnt subcommand -->
+  <tbody><tr valign="TOP">
+    <td rowspan="12">lan</td>
+    <td rowspan="2">cnt</td>
+    <td colspan="2">clear</td>
+    <td>Clear LAN debug counters</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">disp</td>
+    <td>Display LAN debug counters</td>
+  </tr>
+<!-- dbg subcommand -->
+  <tr valign="TOP">
+    <td rowspan="3">dbg</td>
+    <td>arp</td>
+    <td>&lt;<i>IpAddr</i>&gt;</td>
+    <td>Send a IP ARP packet (Only used in RAS debug mode)</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">attach</td>
+    <td>Setup LAN driver (Only used in RAS debug mode)</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">sap</td>
+    <td>Send a IPX SAP packet (Only used in RAS debug mode)</td>
+  </tr>
+<!-- enet subcommand -->
+  <tr valign="TOP">
+    <td rowspan="2">enet</td>
+    <td colspan="2">cntclear</td>
+    <td>Clear ethernet counter</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">cntdisp</td>
+    <td>Display ethernet counter</td>
+  </tr>
+<!-- iface subcommand -->
+  <tr valign="TOP">
+    <td>iface</td>
+    <td colspan="2">&lt;<i>type</i>&gt;</td>
+    <td>Set type of interface:<br>
+<dd>type = 0: TPI (10BaseT,compatible Squelch level)<br>
+</dd><dd>type = 1: 10Base2<br>
+</dd><dd>type = 2: AUI<br>
+</dd><dd>type = 3: IPI (Reduced Squelch Level)</dd></td>
+<!-- mac subcommand -->
+  </tr><tr valign="TOP">
+    <td>mac</td>
+    <td colspan="2">&lt;<i>macaddr</i>&gt;</td>
+    <td>Set LAN Mac address</td>
+  </tr>
+<!-- muladdr subcommand -->
+  <tr valign="TOP">
+    <td>muladdr</td>
+    <td colspan="2">&lt;<i>bitmask</i>&gt;</td>
+    <td>Set bit mask for multicast address</td>
+  </tr>
+<!-- reg subcommand -->
+  <tr valign="TOP">
+    <td colspan="3">reg</td>
+    <td>Display LAN hardware related registers</td>
+  </tr>
+<!-- rxmod subcommand -->
+  <tr valign="TOP">
+    <td>rxmod</td>
+    <td colspan="2">&lt;<i>mode</i>&gt;</td>
+    <td>Set LAN receive mode:<br>
+<dd>mode = 1: Turn OFF receiving<br>
+</dd><dd>mode = 2: Receive only packets of this interface<br>
+</dd><dd>mode = 3: Mode 2 + Broadcast<br>
+</dd><dd>mode = 5: Mode 2 + Multicast<br>
+</dd><dd>mode = 6: All packets</dd></td>
+  </tr>
+</tbody></table></p><p></p>
+
+<p><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr valign="TOP">
+    <td class="BGWhite"><a name="ppp"></a><h3><i>PPP</i> - PPP Related Subcommands</h3></td>
+    <td align="RIGHT" class="BGWhite"><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#Top">TOP</a></td>
+  </tr>
+</tbody></table>
+<table border="0" cellpadding="2" cellspacing="2" width="100%">
+<!-- ppp command -->
+<!-- bod subcommand -->
+  <tbody><tr valign="TOP">
+    <td rowspan="45">ppp</td>
+    <td rowspan="5">bod</td>
+    <td>clear</td>
+    <td>&lt;iface&gt;</td>
+    <td>Clear WAN interface BOD counters</td>
+  </tr>
+  <tr valign="TOP">
+    <td>debug</td>
+    <td>[&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set BOD debug status switch</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">[&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set BOD switch</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">reset</td>
+    <td>Reset BOD counters</td>
+  </tr>
+  <tr valign="TOP">
+    <td>status</td>
+    <td>&lt;iface&gt;</td>
+    <td>Display WAN interface BOD counters</td>
+  </tr>
+<!-- ccp subcommand -->
+  <tr valign="TOP">
+    <td>ccp</td>
+    <td colspan="2">[&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set dial-in CCP switch</td>
+  </tr>
+<!-- config subcommand -->
+  <tr valign="TOP">
+    <td rowspan="10">config</td>
+    <td rowspan="4">ipcp</td>
+    <td>address [&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set IPCP address option switch</td>
+  </tr>
+  <tr valign="TOP">
+    <td>compress [&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set VJ header compression switch</td>
+  </tr>
+  <tr valign="TOP">
+    <td><nobr>idcompress [&lt;<i>switch</i>&gt;]</nobr></td>
+    <td>Display / Set slot ID compression switch</td>
+  </tr>
+  <tr valign="TOP">
+    <td>slots [&lt;<i>value</i>&gt;]</td>
+    <td>Display / Set number of slots<br>
+<dd>value: 1 - 64</dd></td>
+  </tr>
+  <tr valign="TOP">
+    <td rowspan="6">ccp</td>
+    <td>ascend [&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set ascend stac on|off</td>
+  </tr>
+  <tr valign="TOP">
+    <td>check</td>
+    <td>Display Stac check mode</td>
+  </tr>
+  <tr valign="TOP">
+    <td>debug [&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set CCP debug mode switch</td>
+  </tr>
+  <tr valign="TOP">
+    <td>history</td>
+    <td>Display Stac history count</td>
+  </tr>
+  <tr valign="TOP">
+    <td>pfc [&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set PFC switch</td>
+  </tr>
+  <tr valign="TOP">
+    <td>reset [&lt;<i>mode</i>&gt;]</td>
+    <td>Display / Set ascend Stac reset mode<br>
+<dd>mode: 1 - 3</dd></td>
+  </tr>
+<!-- delay subcommand -->
+  <tr valign="TOP">
+    <td>delay</td>
+    <td colspan="2">[&lt;<i>msec</i>&gt;]</td>
+    <td>Display / Set the delay timer, in miliseconds, for sending 
+first PPP packet after call answered</td>
+  </tr>
+<!-- fsm subcommand -->
+  <tr valign="TOP">
+    <td rowspan="7">fsm</td>
+    <td rowspan="4">trace</td>
+    <td>break</td>
+    <td>Set finite state machine trace</td>
+  </tr>
+  <tr valign="TOP">
+    <td>clear</td>
+    <td>Clear finite state machine trace</td>
+  </tr>
+  <tr valign="TOP">
+    <td>disp</td>
+    <td>Display finite state machine trace</td>
+  </tr>
+  <tr valign="TOP">
+    <td>filter</td>
+    <td>Set finite state machine trace filter</td>
+  </tr>
+  <tr valign="TOP">
+    <td rowspan="3">tdata</td>
+    <td>clear</td>
+    <td>Clear finite state machine trace data</td>
+  </tr>
+  <tr valign="TOP">
+    <td>disp</td>
+    <td>Display finite state machine trace data</td>
+  </tr>
+  <tr valign="TOP">
+    <td>filter</td>
+    <td>Set finite state machine trace data filter</td>
+  </tr>
+<!-- iface subcommand -->
+  <tr valign="TOP">
+    <td>iface</td>
+    <td colspan="2">&lt;name&gt; &lt;protocol&gt;</td>
+    <td>Display protocol state</td>
+  </tr>
+<!-- ipcp subcommand -->
+  <tr valign="TOP">
+    <td rowspan="11">ipcp</td>
+    <td>address</td>
+    <td>[&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set IPCP address option switch</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">close</td>
+    <td>Close connection on PPP IPCP interface</td>
+  </tr>
+  <tr valign="TOP">
+    <td>compress</td>
+    <td>[&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set VJ header compression switch</td>
+  </tr>
+  <tr valign="TOP">
+    <td>idcompress</td>
+    <td>[&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set slot ID compression switch</td>
+  </tr>
+  <tr valign="TOP">
+    <td>list</td>
+    <td>&lt;<i>iface</i>&gt;</td>
+    <td>Display interface PPP IPCP table</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">open</td>
+    <td>Open connection on PPP IPCP interface</td>
+  </tr>
+  <tr valign="TOP">
+    <td>slots</td>
+    <td>[&lt;<i>slots</i>&gt;]</td>
+    <td>Display / Set local number of VJ compression slots</td>
+  </tr>
+  <tr valign="TOP">
+    <td>timeout</td>
+    <td>[&lt;<i>timeout</i>&gt;]</td>
+    <td>Display / Set authentication and link quality setup 
+timeout timer in miliseconds (Timeout interval when waiting for 
+response from remote peer)</td>
+  </tr>
+  <tr valign="TOP">
+    <td rowspan="3">try</td>
+    <td>configure [&lt;<i>value</i>&gt;]</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr valign="TOP">
+    <td>failure [&lt;<i>value</i>&gt;]</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr valign="TOP">
+    <td>terminate [&lt;<i>value</i>&gt;]</td>
+    <td>&nbsp;</td>
+  </tr>
+<!-- lcp subcommand -->
+  <tr valign="TOP">
+    <td rowspan="5">lcp</td>
+    <td>acfc</td>
+    <td>[&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set address/control field compression switch</td>
+  </tr>
+  <tr valign="TOP">
+    <td>bacp</td>
+    <td>[&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set bandwidth allocation control switch</td>
+  </tr>
+  <tr valign="TOP">
+    <td>callback</td>
+    <td>[&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set PPP LCP callback switch</td>
+  </tr>
+  <tr valign="TOP">
+    <td>mpin</td>
+    <td>[&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set PPP LCP MP for incoming calls switch</td>
+  </tr>
+  <tr valign="TOP">
+    <td>pfc</td>
+    <td>[&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set protocl field compression switch</td>
+  </tr>
+<!-- mp subcommand -->
+  <tr valign="TOP">
+    <td rowspan="3">mp</td>
+    <td>default</td>
+    <td>[&lt;<i>type</i>&gt;]</td>
+    <td>Display / Set PPP MP default or unknown interface<br>
+<dd>type: rotate | split</dd></td>
+  </tr>
+  <tr valign="TOP">
+    <td>rotate</td>
+    <td>[&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set PPP MP rotate switch</td>
+  </tr>
+  <tr valign="TOP">
+    <td>split</td>
+    <td>[&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set PPP MP split switch</td>
+  </tr>
+<!-- show subcommand -->
+  <tr valign="TOP">
+    <td>show</td>
+    <td colspan="2">&lt;<i>device</i>&gt;</td>
+    <td>Show channel PPP information<br>
+<dd>device: PPP device channel, e.g. poe0</dd></td>
+  </tr>
+</tbody></table></p><p></p>
+
+<p><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr valign="TOP">
+    <td class="BGWhite"><a name="radius"></a><h3><i>RADIUS</i> - Radius Related Subcommands</h3></td>
+    <td align="RIGHT" class="BGWhite"><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#Top">TOP</a></td>
+  </tr>
+</tbody></table>
+<table border="0" cellpadding="2" cellspacing="2" width="100%">
+<!-- radius command -->
+<!-- auth subcommand -->
+  <tbody><tr valign="TOP">
+    <td rowspan="5">radius</td>
+    <td rowspan="5">auth</td>
+    <td>debug</td>
+    <td>[&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set authentication debug mode switch</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">port</td>
+    <td>Display radius authentication client port number</td>
+  </tr>
+  <tr valign="TOP">
+    <td>secret</td>
+    <td>&lt;<i>password</i>&gt;</td>
+    <td>Set radius authentication secret (password)</td>
+  </tr>
+  <tr valign="TOP">
+    <td>server</td>
+    <td>[&lt;<i>name</i>&gt;]</td>
+    <td>Display / Set radius authentication server</td>
+  </tr>
+  <tr valign="TOP">
+    <td>switch</td>
+    <td>[&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set authentication mode switch</td>
+  </tr>
+</tbody></table></p><p></p>
+
+<p><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr valign="TOP">
+    <td class="BGWhite"><a name="snmp"></a><h3><i>SNMP</i> - SNMP Related Subcommands</h3></td>
+    <td align="RIGHT" class="BGWhite"><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#Top">TOP</a></td>
+  </tr>
+</tbody></table>
+<table border="0" cellpadding="2" cellspacing="2" width="100%">
+<!-- snmp command -->
+<!-- xyz subcommand -->
+  <tbody><tr valign="TOP">
+    <td colspan="4">snmp</td>
+    <td>&nbsp;</td>
+  </tr>
+</tbody></table></p><p></p>
+
+<p><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr valign="TOP">
+    <td class="BGWhite"><a name="sys"></a><h3><i>SYS</i> - System Related Subcommands</h3></td>
+    <td align="RIGHT" class="BGWhite"><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#Top">TOP</a></td>
+  </tr>
+</tbody></table>
+<table border="0" cellpadding="2" cellspacing="2" width="100%">
+<!-- sys command -->
+<!-- adjtime subcommand -->
+  <tbody><tr valign="TOP">
+    <td rowspan="112">sys</td>
+    <td colspan="3">adjtime</td>
+    <td>Adjust the local date and time, try a client 
+connection to the configured time server and accord the UTC 
+answer with the preset timezone offset</td>
+  </tr>
+<!-- baud subcommand -->
+  <tr valign="TOP">
+    <td>baud</td>
+    <td colspan="2">&lt;<i>speed</i>&gt;</td>
+    <td>Set console speed<br>
+<dd>speed = 1: 38400 bps (Default if omitted)<br>
+</dd><dd>speed = 2: 19200 bps<br>
+</dd><dd>speed = 3: 9600 bps<br>
+</dd><dd>speed = 4: 57600 bps<br>
+</dd><dd>speed = 5: 115200 bps</dd></td>
+  </tr>
+<!-- callhist subcommand -->
+  <tr valign="TOP">
+    <td rowspan="3">callhist</td>
+    <td>add</td>
+    <td><nobr>&lt;<i>name</i>&gt; &lt;<i>dir</i>&gt; &lt;<i>rate</i>&gt; &lt;<i>uptime</i>&gt;</nobr></td>
+    <td>Add the call history<br>
+<div align="RIGHT">(* DEFUNCT *)</div></td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">display</td>
+    <td>Display the call history</td>
+  </tr>
+  <tr valign="TOP">
+    <td>remove</td>
+    <td>&lt;<i>index</i>&gt;</td>
+    <td>Remove the call history at index</td>
+  </tr>
+<!-- cbuf subcommand -->
+  <tr valign="TOP">
+    <td rowspan="3">cbuf</td>
+    <td rowspan="2">cnt</td>
+    <td>disp</td>
+    <td>Display cbuf static</td>
+  </tr>
+  <tr valign="TOP">
+    <td>clear</td>
+    <td>Clear cbuf static</td>
+  </tr>
+  <tr valign="TOP">
+    <td>disp</td>
+    <td>&lt;a|f|u&gt;</td>
+    <td>Display cbuf<br>
+<dd>a: all<br>
+</dd><dd>f: free<br>
+</dd><dd>u: used</dd></td>
+  </tr>
+<!-- clock subcommand -->
+  <tr valign="TOP">
+    <td>clock</td>
+    <td colspan="2">display</td>
+    <td>Display clock procedure<br>
+<div align="RIGHT">(* DEFUNCT *)</div></td>
+  </tr>
+<!-- cmgr subcommand -->
+  <tr valign="TOP">
+    <td rowspan="3">cmgr</td>
+    <td>data</td>
+    <td>&lt;<i>chan</i>&gt;</td>
+    <td>Display channel connection manager data</td>
+  </tr>
+  <tr valign="TOP">
+    <td rowspan="2">trace</td>
+    <td>clear &lt;<i>chan</i>&gt;</td>
+    <td>Clear channel connection manager trace</td>
+  </tr>
+  <tr valign="TOP">
+    <td>disp &lt;<i>chan</i>&gt;</td>
+    <td>Display channel connection manager trace</td>
+  </tr>
+<!-- countrycode subcommand -->
+  <tr valign="TOP">
+    <td>countrycode</td>
+    <td colspan="2">[&lt;<i>country-code</i>&gt;]</td>
+    <td>Display / Set country code</td>
+  </tr>
+<!-- cpu subcommand -->
+  <tr valign="TOP">
+    <td>cpu</td>
+    <td colspan="2">display</td>
+    <td>Display CPU utilization</td>
+  </tr>
+<!-- date subcommand -->
+  <tr valign="TOP">
+    <td>date</td>
+    <td colspan="2">[&lt;<i>year</i>&gt; &lt;<i>month</i>&gt; &lt;<i>day</i>&gt;]</td>
+    <td>Display / Set system date<br>
+<dd>year: 4 digit year<br>
+</dd><dd>month: number between 1 and 12<br>
+</dd><dd>day: number between 1 and 31</dd></td>
+  </tr>
+<!-- ddns subcommand -->
+  <tr valign="TOP">
+    <td rowspan="4">ddns</td>
+    <td>debug</td>
+    <td>[&lt;<i>flag</i>&gt;]</td>
+    <td>Display / Set Dynamic DNS debug<br>
+<dd>flag = 0: Disable<br>
+</dd><dd>flag = 1: Enable</dd></td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">display</td>
+    <td>Display Dynamic DNS status</td>
+  </tr>
+  <tr valign="TOP">
+    <td>logout</td>
+    <td>&lt;<i>iface</i>&gt;</td>
+    <td>Publish IP address of interface with offline 
+status onto the configured Dynamic DNS server</td>
+  </tr>
+  <tr valign="TOP">
+    <td>restart</td>
+    <td>&lt;<i>iface</i>&gt;</td>
+    <td>Publish IP address of interface with online 
+status onto the configured Dynamic DNS server</td>
+  </tr>
+<!-- dir subcommand -->
+  <tr valign="TOP">
+    <td colspan="3">dir</td>
+    <td>Display file directory<br>
+<div align="RIGHT">(* DEFUNCT *)</div></td>
+  </tr>
+<!-- domainname subcommand -->
+  <tr valign="TOP">
+    <td colspan="3">domainname</td>
+    <td>Display system domain name</td>
+  </tr>
+<!-- edit subcommand -->
+  <tr valign="TOP">
+    <td>edit</td>
+    <td colspan="2">&lt;<i>filename</i>&gt;</td>
+    <td>Edit a text file<br>
+<dd>Edit Commands:
+</dd><dd></dd><dd>q: Quit<br>
+</dd><dd></dd><dd>x: Save and exit<br>
+</dd><dd></dd><dd>i: Insert after this line<br>
+</dd><dd></dd><dd>d: Delete this line<br>
+</dd><dd></dd><dd>r: Replace this line<br>
+</dd><dd></dd><dd>n: Next line<br>
+Press <b>n</b> until you see the line you want to modify, or where 
+you want to insert a new line, etc., then press the key for the 
+appropriate command, e.g.: <b>i</b> followed by the new entry 
+you want to add.  When you are done, enter <b>x</b> to save the 
+file and exit or <b>q</b> to quit without saving.</dd></td>
+  </tr>
+<!-- errctl subcommand -->
+  <tr valign="TOP">
+    <td>errctl</td>
+    <td colspan="2">[&lt;<i>level</i>&gt;]</td>
+    <td>Display / Set the error control level<br>
+<dd>level = 0: Crash no save, not in debug mode (Default)<br>
+</dd><dd>level = 1: Crash no save, in debug mode<br>
+</dd><dd>level = 2: Crash save, not in debug mode<br>
+</dd><dd>level = 3: Crash save, in debug mode<br>
+(If ERRCTL is on system will stay at BootModule debug mode)</dd></td>
+  </tr>
+<!-- event subcommand -->
+  <tr valign="TOP">
+    <td rowspan="3">event</td>
+    <td colspan="2">display</td>
+    <td>Display tag flags information</td>
+  </tr>
+  <tr valign="TOP">
+    <td rowspan="2">trace</td>
+    <td>display</td>
+    <td>Display system event information</td>
+  </tr>
+  <tr valign="TOP">
+    <td>clear</td>
+    <td>Clear system event information</td>
+  </tr>
+<!-- extraphnum subcommand -->
+  <tr valign="TOP">
+    <td rowspan="5">extraphnum</td>
+    <td>add</td>
+    <td>&lt;<i>set</i>&gt; &lt;<i>phone1</i>&gt; [&lt;<i>phone2</i>&gt;]</td>
+    <td>Add outcalling phone numbers<br>
+<dd>set: 1 - 3</dd></td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">display</td>
+    <td>Display outcalling phone numbers</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">node</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr valign="TOP">
+    <td>remove</td>
+    <td>&lt;<i>set</i>&gt;</td>
+    <td><dd>set: 1 - 3</dd></td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">reset</td>
+    <td>&nbsp;</td>
+  </tr>
+<!-- feature subcommand -->
+  <tr valign="TOP">
+    <td colspan="3">feature</td>
+    <td>Display feature bit settings list</td>
+  </tr>
+<!-- fid subcommand -->
+  <tr valign="TOP">
+    <td>fid</td>
+    <td colspan="2">display</td>
+    <td>Display function id list</td>
+  </tr>
+<!-- filter subcommand -->
+  <tr valign="TOP">
+    <td rowspan="3">filter</td>
+    <td colspan="2">clear</td>
+    <td>Clear filter statistic counter</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">disp</td>
+    <td>Display filter statistic counters</td>
+  </tr>
+  <tr valign="TOP">
+    <td>sw</td>
+    <td>[&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set filter statistic counter switch</td>
+  </tr>
+<!-- hostname subcommand -->
+  <tr valign="TOP">
+    <td>hostname</td>
+    <td colspan="2">[&lt;<i>name</i>&gt;]</td>
+    <td>Display / Set system hostname (Max 32 
+characters from <nobr>[A-Z,a-z,0-9]</nobr>)</td>
+  </tr>
+<!-- iface subcommand -->
+  <tr valign="TOP">
+    <td>iface</td>
+    <td colspan="2">disp</td>
+    <td>Display interface list</td>
+  </tr>
+<!-- isr subcommand -->
+  <tr valign="TOP">
+    <td colspan="3">isr</td>
+    <td>Display interrupt entry (Debugging tool)<br>
+<div align="RIGHT">(* DEFUNCT *)</div></td>
+  </tr>
+<!-- log subcommand -->
+  <tr valign="TOP">
+    <td rowspan="3">log</td>
+    <td colspan="2">clear</td>
+    <td>Clear error log</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">disp</td>
+    <td>Display error log</td>
+  </tr>
+  <tr valign="TOP">
+    <td>online</td>
+    <td>[&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set error log online display switch</td>
+  </tr>
+<!-- Marker -->
+<!-- map subcommand -->
+  <tr valign="TOP">
+    <td colspan="3">map</td>
+    <td>Display memory map table<br>
+<div align="RIGHT">(* DEFUNCT *)</div></td>
+  </tr>
+<!-- mbuf subcommand -->
+  <tr valign="TOP">
+    <td rowspan="7">mbuf</td>
+    <td rowspan="2">cnt</td>
+    <td>cl</td>
+    <td>Clear system mbuf count</td>
+  </tr>
+  <tr valign="TOP">
+    <td>disp</td>
+    <td>Display system mbuf count</td>
+  </tr>
+  <tr valign="TOP">
+    <td>debug</td>
+    <td>[&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set mbuf system debug switch</td>
+  </tr>
+  <tr valign="TOP">
+    <td>disp</td>
+    <td>&lt;<i>address</i>&gt;</td>
+    <td>Display mbuf status</td>
+  </tr>
+  <tr valign="TOP">
+    <td>link</td>
+    <td>link</td>
+    <td>List system mbuf link</td>
+  </tr>
+  <tr valign="TOP">
+    <td>pool</td>
+    <td>&lt;<i>id</i>&gt; &lt;<i>type</i>&gt;</td>
+    <td>List system mbuf pool</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">status</td>
+    <td>Display system mbuf status</td>
+  </tr>
+<!-- memory subcommand -->
+  <tr valign="TOP">
+    <td>memory</td>
+    <td colspan="2">&lt;<i>address</i>&gt; &lt;<i>len</i>&gt;</td>
+    <td>Display memory content<br>
+<div align="RIGHT">(* DEFUNCT *)</div></td>
+  </tr>
+<!-- memutil subcommand -->
+  <tr valign="TOP">
+    <td rowspan="4">memutil</td>
+    <td>mcell</td>
+    <td>&lt;<i>mid</i>&gt; [&lt;<i>type</i>&gt;]</td>
+    <td>Display memory cells by given ID<br>
+<dd>type = a: All cells (Default)<br>
+</dd><dd>type = f: Free cells<br>
+</dd><dd>type = u: Used cells</dd></td>
+  </tr>
+  <tr valign="TOP">
+    <td>mq</td>
+    <td>&lt;<i>address</i>&gt; &lt;<i>len</i>&gt;</td>
+    <td>Display memory queues</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">msecs</td>
+    <td>Display memory sections</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">usage</td>
+    <td>Display memory allocate and heap status</td>
+  </tr>
+<!-- memwrite subcommand -->
+  <tr valign="TOP">
+    <td>memwrite</td>
+    <td colspan="2">&lt;<i>null</i>&gt;</td>
+    <td>Write to memory<br>
+<div align="RIGHT">(* DEFUNCT *)</div></td>
+  </tr>
+<!-- pro subcommand -->
+  <tr valign="TOP">
+    <td rowspan="3">pro</td>
+    <td colspan="2">disp</td>
+    <td>Display all process information</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ps</td>
+    <td>&lt;<i>tag</i>&gt;</td>
+    <td>Display process's status by a given tag</td>
+  </tr>
+  <tr valign="TOP">
+    <td>stack</td>
+    <td>&lt;<i>tag</i>&gt;</td>
+    <td>Display process's stack by a given tag</td>
+  </tr>
+<!-- queue subcommand -->
+  <tr valign="TOP">
+    <td rowspan="2">queue</td>
+    <td>disp</td>
+    <td>[&lt;<i>type</i>&gt;] [<i>start</i> [<i>end</i>]]</td>
+    <td>Display queue by given status and range numbers<br>
+<dd>type = a: All queues<br>
+</dd><dd>type = f: Free queues<br>
+</dd><dd>type = u: Used queues</dd></td>
+  </tr>
+  <tr valign="TOP">
+    <td>ndisp</td>
+    <td>&lt;<i>num</i>&gt;</td>
+    <td>Display a queue by a given number</td>
+  </tr>
+<!-- quit subcommand -->
+  <tr valign="TOP">
+    <td colspan="3">quit</td>
+    <td>Quit CI command mode</td>
+  </tr>
+<!-- reboot subcommand -->
+  <tr valign="TOP">
+    <td>reboot</td>
+    <td colspan="2">&lt;<i>code</i>&gt;</td>
+    <td>Reboot system<br>
+<dd>code = 0: Cold boot<br>
+</dd><dd>code = 1: Immediately boot<br>
+</dd><dd>code = 2: BootModule (BootBase) debug mode</dd></td>
+  </tr>
+<!-- reslog subcommand -->
+  <tr valign="TOP">
+    <td rowspan="2">reslog</td>
+    <td colspan="2">disp</td>
+    <td>Display resources trace</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">clear</td>
+    <td>Clear resources trace</td>
+  </tr>
+<!-- rn subcommand -->
+  <tr valign="TOP">
+    <td rowspan="6">rn</td>
+    <td colspan="2">disp</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">load</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">nailup</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">nat</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">save</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">syst</td>
+    <td>&nbsp;</td>
+  </tr>
+<!-- roadrunner subcommand -->
+  <tr valign="TOP">
+    <td rowspan="3">roadrunner</td>
+    <td>debug</td>
+    <td>&lt;<i>level</i>&gt;</td>
+    <td>Enable / Disable roadrunner service<br>
+<dd>level = 0: Disable (Default)<br>
+</dd><dd>level = 1: Enable</dd></td>
+  </tr>
+  <tr valign="TOP">
+    <td>disp</td>
+    <td>&lt;<i>iface</i>&gt;</td>
+    <td>Display roadrunner information<br>
+<dd>iface: wanif0 (WAN port)</dd></td>
+  </tr>
+  <tr valign="TOP">
+    <td>restart</td>
+    <td>&lt;iface&gt;</td>
+    <td>Restart roadrunner service</td>
+  </tr>
+<!-- server subcommand -->
+  <tr valign="TOP">
+    <td rowspan="6">server</td>
+    <td>access</td>
+    <td>&lt;<i>service</i>&gt; &lt;<i>type</i>&gt;</td>
+    <td>Set access type for service<br>
+<dd>service: dns | ftp | icmp | telnet | web<br>
+</dd><dd>type = 0: Both LAN and WAN access<br>
+</dd><dd>type = 1: Disable access to service<br>
+</dd><dd>type = 2: LAN access only<br>
+</dd><dd>type = 3: WAN access only</dd></td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">disp</td>
+    <td>Display server config</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">load</td>
+    <td>Load server config into memory</td>
+  </tr>
+  <tr valign="TOP">
+    <td>port</td>
+    <td>&lt;<i>service</i>&gt; &lt;<i>port</i>&gt;</td>
+    <td>Set IP port number for service<br>
+<dd>service: dns | ftp | icmp | telnet | web</dd></td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">save</td>
+    <td>Save server config</td>
+  </tr>
+  <tr valign="TOP">
+    <td>secureip</td>
+    <td>&lt;<i>service</i>&gt; &lt;<i>ip-addr</i>&gt;</td>
+    <td>Set port number for service<br>
+<dd>service: dns | ftp | icmp | telnet | web</dd></td>
+  </tr>
+<!-- socket subcommand -->
+  <tr valign="TOP">
+    <td colspan="3">socket</td>
+    <td>Display open sockets</td>
+  </tr>
+<!-- spt subcommand -->
+  <tr valign="TOP">
+    <td rowspan="2">spt</td>
+    <td>dump</td>
+    <td>&lt;root|rn|user|slot&gt;</td>
+    <td>Dump spt raw data</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">size</td>
+    <td>Display spt record size</td>
+  </tr>
+<!-- stdio subcommand -->
+  <tr valign="TOP">
+    <td>stdio</td>
+    <td colspan="2">[&lt;timeout&gt;]</td>
+    <td>Display / Set terminal timeout value (in minutes)</td>
+  </tr>
+<!-- syslog subcommand -->
+  <tr valign="TOP">
+    <td rowspan="4">syslog</td>
+    <td>facility</td>
+    <td>&lt;facility&gt;</td>
+    <td>Set syslog local facility number<br>
+<dd>facility: 0 - 6</dd></td>
+  </tr>
+  <tr valign="TOP">
+    <td>mode</td>
+    <td>[&lt;switch&gt;]</td>
+    <td>Display / Set syslog enabled switch</td>
+  </tr>
+  <tr valign="TOP">
+    <td>server</td>
+    <td>&lt;ip-addr&gt;</td>
+    <td>Set syslog server IP address</td>
+  </tr>
+  <tr valign="TOP">
+    <td>type</td>
+    <td>[&lt;bitmap&gt;]</td>
+    <td>Display / Set syslog log type bitmap<br>
+<dd>bit 0: (Least significant bit)<br>
+</dd><dd>bit 1: <br>
+</dd><dd>bit 2: <br>
+</dd><dd>bit 3: <br>
+</dd><dd>bit 4: PPP log<br>
+</dd><dd>bit 5: Filter log<br>
+</dd><dd>bit 6: Packet triggered<br>
+</dd><dd>bit 7: CDR (Most significant bit)</dd></td>
+  </tr>
+<!-- time subcommand -->
+  <tr valign="TOP">
+    <td>time</td>
+    <td colspan="2">[&lt;<i>hour</i>&gt; [&lt;<i>min</i>&gt; [&lt;<i>sec</i>&gt;]]]</td>
+    <td>Display / Set system time<br>
+<dd>hour: number between 0 and 24<br>
+</dd><dd>min: number between 0 and 59 (0 if omitted)<br>
+</dd><dd>sec: number between 0 and 59 (0 if omitted)</dd></td>
+  </tr>
+<!-- timer subcommand -->
+  <tr valign="TOP">
+    <td>timer</td>
+    <td>disp</td>
+    <td>[&lt;<i>type</i>&gt;]</td>
+    <td>Display timer cell<br>
+<dd>type = a: A timers<br>
+</dd><dd>type = f: F timers<br>
+</dd><dd>type = u: U timers</dd></td>
+  </tr>
+<!-- trcdisp subcommand -->
+  <tr valign="TOP">
+    <td rowspan="2">trcdisp</td>
+    <td colspan="2">brief</td>
+    <td>Online display packet content briefly</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">parse</td>
+    <td>Online parse packet content</td>
+  </tr>
+<!-- trclog subcommand -->
+  <tr valign="TOP">
+    <td rowspan="7">trclog</td>
+    <td colspan="2">call</td>
+    <td>Display call event</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">clear</td>
+    <td>Clear trace</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">disp</td>
+    <td>Display trace log</td>
+  </tr>
+  <tr valign="TOP">
+    <td>level</td>
+    <td>[&lt;<i>level</i>&gt;]</td>
+    <td>Display / Set trace level of trace log<br>
+<dd>level: 1 - 10</dd></td>
+  </tr>
+  <tr valign="TOP">
+    <td>online</td>
+    <td>[&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set trace log online switch</td>
+  </tr>
+  <tr valign="TOP">
+    <td>switch</td>
+    <td>[&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set system trace log switch</td>
+  </tr>
+  <tr valign="TOP">
+    <td>type</td>
+    <td>[&lt;<i>bitmap</i>&gt;]</td>
+    <td>Display / Set trace type of trace log (64 bits)</td>
+  </tr>
+<!-- trcpacket subcommand -->
+  <tr valign="TOP">
+    <td rowspan="9">trcpacket</td>
+    <td>channel</td>
+    <td>&lt;<i>chan</i>&gt; [&lt;<i>direction</i>&gt;]</td>
+    <td>Display / Set packet trace direction for a given channel<br>
+<dd>direction: none | incoming | outgoing | bothway</dd></td>
+  </tr>
+  <tr valign="TOP">
+    <td>create</td>
+    <td>&lt;<i>entry</i>&gt; &lt;<i>size</i>&gt;</td>
+    <td>Create packet trace buffer</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">destroy</td>
+    <td>Destroy packet trace buffer</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">disp</td>
+    <td>Display packet trace</td>
+  </tr>
+  <tr valign="TOP">
+    <td>string</td>
+    <td>[&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set string display in packet trace switch</td>
+  </tr>
+  <tr valign="TOP">
+    <td>switch</td>
+    <td>[&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set packet trace switch</td>
+  </tr>
+  <tr valign="TOP">
+    <td>udp</td>
+    <td>&lt;sw|addr|port&gt;</td>
+    <td>Send packet trace to other system</td>
+  </tr>
+  <tr valign="TOP">
+    <td colspan="2">brief</td>
+    <td>Display packet content briefly</td>
+  </tr>
+  <tr valign="TOP">
+    <td>parse</td>
+    <td>[[&lt;<i>begin</i>&gt;] &lt;<i>end</i>&gt;]</td>
+    <td>Parse packet content</td>
+  </tr>
+<!-- version subcommand -->
+  <tr valign="TOP">
+    <td colspan="3">version</td>
+    <td>Display RAS code and driver version</td>
+  </tr>
+<!-- view subcommand -->
+  <tr valign="TOP">
+    <td>view</td>
+    <td colspan="2">&lt;filename&gt;</td>
+    <td>View a text file</td>
+  </tr>
+<!-- wdog subcommand -->
+  <tr valign="TOP">
+    <td rowspan="2">wdog</td>
+    <td>switch</td>
+    <td>[&lt;<i>switch</i>&gt;]</td>
+    <td>Display / Set watchdog timer switch</td>
+  </tr>
+  <tr valign="TOP">
+    <td>cnt</td>
+    <td>[&lt;<i>value</i>&gt;]</td>
+    <td>Display / Set watchdog counts<br>
+<dd>value: 0 - 34463</dd></td>
+  </tr>
+</tbody></table></p><p></p>
+
+<p><br><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr valign="TOP">
+    <td class="BGWhite"><a name="wan"></a><h3><i>WAN</i> - WAN Related Subcommands</h3></td>
+    <td align="RIGHT" class="BGWhite"><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#Top">TOP</a></td>
+  </tr>
+</tbody></table>
+<table border="0" cellpadding="2" cellspacing="2" width="100%">
+<!-- wan command -->
+<!-- atring subcommand -->
+  <tbody><tr valign="TOP">
+    <td rowspan="6">wan</td>
+    <td>atring</td>
+    <td colspan="2">&lt;<i>chan</i>&gt;</td>
+    <td>Show AT command response buffer</td>
+  </tr>
+<!-- cnt subcommand -->
+  <tr valign="TOP">
+    <td rowspan="2">cnt</td>
+    <td>clear</td>
+    <td>&lt;<i>chan</i>&gt;</td>
+    <td>Clear status counters</td>
+  </tr>
+  <tr valign="TOP">
+    <td>disp</td>
+    <td>&lt;<i>chan</i>&gt;</td>
+    <td>Display status counters</td>
+  </tr>
+<!-- drop subcommand -->
+  <tr valign="TOP">
+    <td>drop</td>
+    <td colspan="2">&lt;<i>chan</i>&gt;</td>
+    <td>Drop connection</td>
+  </tr>
+<!-- mtype subcommand -->
+  <tr valign="TOP">
+    <td>mtype</td>
+    <td colspan="2">&lt;<i>chan</i>&gt;</td>
+    <td>Display internal modem type</td>
+  </tr>
+<!-- redirect subcommand -->
+  <tr valign="TOP">
+    <td>redirect</td>
+    <td colspan="2">&lt;<i>chan</i>&gt;</td>
+    <td>Enter redirect mode</td>
+  </tr>
+</tbody></table></p><p></p>
+
+<hr>
+
+<p><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr valign="TOP">
+    <td class="BGWhite"><a name="AUTOEXEC.NET"></a><h2>Default AUTOEXEC.NET File Contents</h2></td>
+    <td align="RIGHT" class="BGWhite"><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#Top">TOP</a></td>
+  </tr>
+</tbody></table>
+<table border="0" cellpadding="5" cellspacing="0" width="100%">
+  <tbody><tr>
+    <td><pre>sys errctl 0
+sys trcl level 5
+sys trcl type 1180
+sys trcp cr 96 128
+sys trcl sw on
+ip tcp mss 1024
+ip tcp limit 2
+ip tcp irtt 65000
+ip tcp window 4
+ip tcp ceiling 6000
+ip rip activate
+ip rip merge on
+ip icmp disc enif0 off
+ppp ipcp com off
+sys mbuf debug off
+sys wdog sw on
+ip antip 1</pre></td>
+  </tr>
+</tbody></table></p><p></p>
+
+<hr>
+
+<p><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr valign="TOP">
+    <td class="BGWhite"><a name="TERMCAP"></a><h2>Default TERMCAP File Contents</h2></td>
+    <td align="RIGHT" class="BGWhite"><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#Top">TOP</a></td>
+  </tr>
+</tbody></table>
+<table border="0" cellpadding="5" cellspacing="0" width="100%">
+  <tbody><tr>
+    <td><pre>vt100|dec-vt100|vt100-am|vt100am|dec vt100:\
+	:do=^J:co#80:li#24:cl=50\E[;H\E[2J:sf=2*\ED:\
+	:le=^H:bs:am:cm=5\E[%i%d;%dH:nd=2\E[C:up=2\E[A:\
+	:ce=3\E[K:cd=50\E[J:so=2\E[7m:se=2\E[m:us=2\E[4m:ue=2\E[m:\
+	:md=2\E[1m:mr=2\E[7m:mb=2\E[5m:me=2\E[m:is=\E[1;24r\E[24;1H:\
+	:if=/usr/share/tabset/vt100:\
+	:as=\E(0:ae=\E(B:ac=llmmkkjjuuttvvwwqqxxnnoosspprr``aaffgg~~..--++,,hhII00yyzz:\
+	:rs=\E&gt;\E[?3l\E[?4l\E[?5l\E[?7h\E[?8h:ks=\E[?1h\E=:ke=\E[?1l\E&gt;:\
+	:ku=\EOA:kd=\EOB:kr=\EOC:kl=\EOD:kb=^H:\
+	:ho=\E[H:k1=\EOP:k2=\EOQ:k3=\EOR:k4=\EOS:pt:sr=2*\EM:vt#3:xn:\
+	:sc=\E7:rc=\E8:cs=\E[%i%d;%dr:
+#
+# END OF TERMCAP
+#  ------------------------</pre></td>
+  </tr>
+</tbody></table></p><p></p>
+
+<hr>
+
+<p><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr valign="TOP">
+    <td class="BGWhite"><a name="BootBase"></a><h2>BootBase Command List</h2></td>
+    <td align="RIGHT" class="BGWhite"><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#Top">TOP</a></td>
+  </tr>
+</tbody></table>
+<table border="0" cellpadding="2" cellspacing="2" width="100%">
+  <tbody><tr valign="TOP">
+    <td>AT</td>
+    <td>Just answer OK</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATHE</td>
+    <td>Print help</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATBAx</td>
+    <td>Change baudrate<br>
+<dd>x = 1: 38.4 Kbps (38400 bps)<br>
+</dd><dd>x = 2: 19.2 Kbps (19200 bps)<br>
+</dd><dd>x = 3: 9.6 Kbps (9600 bps)<br>
+</dd><dd>x = 4: 57.6 Kbps (57600 bps)<br>
+</dd><dd>x = 5: 115.2 Kbps (115200 bps)</dd></td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATENx,[y]</td>
+    <td>Set BootExtension Debug Flag<br>
+<dd>y = password</dd></td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATSE</td>
+    <td>Show the seed of password generator</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATTI[h,m,s]</td>
+    <td>Show current time or change system time<br>
+<dd>h = hours<br>
+</dd><dd>m = minutes<br>
+</dd><dd>s = seconds</dd></td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATDA[y,m,d]</td>
+    <td>Show current date or change system date<br>
+<dd>y = year<br>
+</dd><dd>m = month<br>
+</dd><dd>d = day</dd></td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATDS</td>
+    <td>Dump RAS stack</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATDT</td>
+    <td>Dump Boot Module Common Area</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATDUx,y</td>
+    <td>Dump memory contents from address x for length y</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATWBx,y</td>
+    <td>Write address x with 8-bit value y</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATWWx,y</td>
+    <td>Write address x with 16-bit value y</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATWLx,y</td>
+    <td>Write address x with 32-bit value y</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATRBx</td>
+    <td>Display the 8-bit value of address x</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATRWx</td>
+    <td>Display the 16-bit value of address x</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATRLx</td>
+    <td>Display the 32-bit value of address x</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATGO[x]</td>
+    <td>Run program at addr x or boot router</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATGR</td>
+    <td>Boot router</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATGT</td>
+    <td>Run Hardware Test Program</td>
+  </tr>
+  <tr valign="TOP">
+    <td>AT%Tx</td>
+    <td>Enable Hardware Test Program at boot up</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATBTx</td>
+    <td>Block write enable (x=1: enable, other: disable)</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATRTw,x,y[,z]</td>
+    <td>RAM test level w, from address x to y (z iterations)</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATWEa[,b,c,d]</td>
+    <td>Write MAC addr, Country code, EngDbgFlag, FeatureBit to flash ROM</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATCUx</td>
+    <td>Write Country code to flash ROM</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATCB</td>
+    <td>Copy from FLASH ROM to working buffer</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATCL</td>
+    <td>Clear working buffer</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATSB</td>
+    <td>Save working buffer to FLASH ROM</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATBU</td>
+    <td>Dump manufacturer related data in working buffer</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATSH</td>
+    <td>Dump manufacturer related data in ROM</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATWMx</td>
+    <td>Set MAC address in working buffer</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATCOx</td>
+    <td>Set country code in working buffer</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATFLx</td>
+    <td>Set EngDebugFlag in working buffer</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATSTx</td>
+    <td>Set ROMRAS address in working buffer</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATSYx</td>
+    <td>Set system type in working buffer</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATVDx</td>
+    <td>Set vendor name in working buffer</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATPNx</td>
+    <td>Set product name in working buffer</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATFEx,y,...</td>
+    <td>Set feature bits in working buffer</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATMP</td>
+    <td>Check &amp; dump memMapTab</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATDOx,y</td>
+    <td>Download from address x for length y to PC via XMODEM</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATTD</td>
+    <td>Download router configuration to PC via XMODEM</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATUPx,y</td>
+    <td>Upload to RAM address x for length y from PC via XMODEM</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATUR</td>
+    <td>Upload router firmware to flash ROM</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATLC</td>
+    <td>Upload router configuration file to flash ROM</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATUXx(,y)</td>
+    <td>XMODEM upload from flash block x to y</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATERx,y</td>
+    <td>Erase flash rom from block x to y</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATWFx,y,z</td>
+    <td>Copy data from addr x to flash addr y, length z</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATXSx</td>
+    <td>XMODEM select<br>
+<dd>x = 0: CRC mode (Default)<br>
+</dd><dd>x = 1: Checksum mode</dd></td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATLOa,b,c,d</td>
+    <td>Int/Trap Log Cmd</td>
+  </tr>
+  <tr valign="TOP">
+    <td>ATSR</td>
+    <td>System reboot</td>
+  </tr>
+</tbody></table></p><p></p>
+
+<hr>
+
+<p><table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr valign="TOP">
+    <td class="BGWhite"><a name="Revision"></a><h2>Revision History</h2></td>
+    <td align="RIGHT" class="BGWhite"><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#Top">TOP</a></td>
+  </tr>
+</tbody></table>
+22-Aug-2002 (Ian)</p><blockquote>First version (still editing/checking) 
+<b>NOT FOR PUBLIC DISTRIBUTION</b></blockquote><p></p>
+
+<p>If you find any errors or omissions in this document please submit corrections. 
+  Also, if you know or can expand on any of the instructions, commands, definitions, 
+  usage or version number when of any commands were added, removed or changed 
+  then please submit them. It is hoped that this document will grow to become 
+  a single point of reference for ZyNOS Command Interface usage.</p>
+
+<p align="RIGHT"><a href="http://www.vaxination.ca/tcpip/zynos_commands.html#Top">TOP</a></p>
+
+
+</body></html>

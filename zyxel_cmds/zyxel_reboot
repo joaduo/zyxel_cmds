@@ -1,0 +1,17 @@
+#!/bin/bash
+# Copyright (c) 2021, Joaquin G. Duo
+# Code Licensed under LGPL License. See LICENSE file.
+
+if [[ $@ == *--help* ]] ; then
+  echo "
+Reboot Zyxel Router through Telnet Shell
+
+  Examples:
+    $(basename $0) # reboot your router and exit
+  
+  --help  print this help
+  "
+  exit 0
+fi
+
+zyxel_sh sys reboot

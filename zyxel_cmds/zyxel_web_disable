@@ -1,0 +1,6 @@
+#!/bin/bash
+# Copyright (c) 2021, Joaquin G. Duo
+# Code Licensed under LGPL License. See LICENSE file.
+
+#0: ALL, 1:None, 2:LAN only, 3:WAN only
+ZYXEL_WEBSERVER_FLAG=1 zyxel_web_enable $@
